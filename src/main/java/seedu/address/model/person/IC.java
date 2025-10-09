@@ -22,7 +22,7 @@ public class IC {
             return false;
         }
 
-        IC otherIC = (IC) other;
-        return ic.equals(otherIC.ic);
+        IC otherIc = (IC) other;
+        return ic.equals(otherIc.ic);
     }
 }
