@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-public class IC {
+public class Ic {
     public final String ic;
 
-    public IC(String ic) {
+    public Ic(String ic) {
         this.ic = ic;
     }
 
@@ -18,11 +18,11 @@ public class IC {
             return true;
         }
 
-        if (!(other instanceof IC)) {
+        if (!(other instanceof Ic)) {
             return false;
         }
 
-        IC otherIc = (IC) other;
+        Ic otherIc = (Ic) other;
         return ic.equals(otherIc.ic);
     }
 }

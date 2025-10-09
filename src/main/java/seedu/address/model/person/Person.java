@@ -18,12 +18,21 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private Ic ic;
     private final Phone phone;
     private final Email email;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Ic ic, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, phone, email, address, tags);
+        this.ic = ic;
+    }
 
     /**
      * Every field must be present and not null.
@@ -37,8 +46,13 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+
     public Name getName() {
         return name;
+    }
+
+    public Ic getIc() {
+        return ic;
     }
 
     public Phone getPhone() {
@@ -91,6 +105,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
+                && ic.equals(otherPerson.ic)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -100,13 +115,14 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, ic, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("ic", ic)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
