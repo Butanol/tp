@@ -17,6 +17,7 @@ public class IC {
     public static boolean isValidIC(String ic) {
         return ic.matches(REGEX_PATTERN);
     }
+
     @Override
     public String toString() {
         return ic;
@@ -32,7 +33,7 @@ public class IC {
             return false;
         }
 
-        IC otherIC = (IC) other;
-        return ic.equals(otherIC.ic);
+        IC otherIc = (IC) other;
+        return ic.equals(otherIc.ic);
     }
 }

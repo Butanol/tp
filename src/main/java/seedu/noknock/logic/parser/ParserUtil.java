@@ -11,7 +11,7 @@ import seedu.noknock.commons.util.StringUtil;
 import seedu.noknock.logic.parser.exceptions.ParseException;
 import seedu.noknock.model.person.Address;
 import seedu.noknock.model.person.Email;
-import seedu.noknock.model.person.Ic;
+import seedu.noknock.model.person.IC;
 import seedu.noknock.model.person.Name;
 import seedu.noknock.model.person.Phone;
 import seedu.noknock.model.person.Ward;
@@ -78,10 +78,10 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
-    public static Ic parseIc(String ic) throws ParseException {
+    public static IC parseIc(String ic) throws ParseException {
         requireNonNull(ic);
         String trimmedIc = ic.trim();
-        return new Ic(ic);
+        return new IC(ic);
     }
 
     /**

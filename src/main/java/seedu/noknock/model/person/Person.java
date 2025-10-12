@@ -17,7 +17,7 @@ import seedu.noknock.model.tag.Tag;
 public class Person {
     // Identity fields
     private final Name name;
-    private Ic ic;
+    private IC ic;
     private Phone phone;
     private Email email;
 
@@ -35,7 +35,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Ic ic, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, IC ic, Phone phone, Email email, Address address, Set<Tag> tags) {
         this(name, phone, email, address, tags);
         this.ic = ic;
     }
@@ -57,7 +57,7 @@ public class Person {
         return name;
     }
 
-    public Ic getIc() {
+    public IC getIc() {
         return ic;
     }
 
@@ -71,9 +71,6 @@ public class Person {
     }
     public Address getAddress() {
         return address;
-    }
-    public Phone getPhone() {
-        return phone;
     }
 
     /**
