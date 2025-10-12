@@ -81,7 +81,7 @@ public class ParserUtil {
     public static IC parseIc(String ic) throws ParseException {
         requireNonNull(ic);
         String trimmedIc = ic.trim();
-        return new IC(ic);
+        return new IC(trimmedIc);
     }
 
     /**
