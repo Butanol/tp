@@ -38,7 +38,7 @@ public class EditPatientCommand extends Command {
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_NAME + "NAME] "
         + "[" + PREFIX_IC + "IC]"
-        + "[" + PREFIX_WARD + "WARD"
+        + "[" + PREFIX_WARD + "WARD]"
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -47,18 +47,18 @@ public class EditPatientCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book.";
 
     private final Index index;
-    private final EditPatientCommand.EditPatientDescriptor editPatientDescriptor;
+    private final EditPatientDescriptor editPatientDescriptor;
 
     /**
      * @param index                 of the patient in the filtered person list to edit
      * @param editPatientDescriptor details to edit the patient with
      */
-    public EditPatientCommand(Index index, EditPatientCommand.EditPatientDescriptor editPatientDescriptor) {
+    public EditPatientCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
         requireNonNull(index);
         requireNonNull(editPatientDescriptor);
 
         this.index = index;
-        this.editPatientDescriptor = new EditPatientCommand.EditPatientDescriptor(editPatientDescriptor);
+        this.editPatientDescriptor = new EditPatientDescriptor(editPatientDescriptor);
     }
 
     /**
