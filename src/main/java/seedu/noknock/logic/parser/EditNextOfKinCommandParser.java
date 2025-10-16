@@ -1,14 +1,15 @@
 package seedu.noknock.logic.parser;
 
-import seedu.noknock.commons.core.index.Index;
-import seedu.noknock.logic.commands.EditNextOfKinCommand;
-import seedu.noknock.logic.parser.exceptions.ParseException;
-
-import static java.util.Objects.requireNonNull;
 import static seedu.noknock.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
+
+import java.util.Objects;
+
+import seedu.noknock.commons.core.index.Index;
+import seedu.noknock.logic.commands.EditNextOfKinCommand;
+import seedu.noknock.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditPatientCommand object
@@ -20,7 +21,7 @@ public class EditNextOfKinCommandParser implements Parser<EditNextOfKinCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditNextOfKinCommand parse(String args) throws ParseException {
-        requireNonNull(args);
+        Objects.requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_RELATIONSHIP);
 
@@ -52,7 +53,8 @@ public class EditNextOfKinCommandParser implements Parser<EditNextOfKinCommand> 
             editNokDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_RELATIONSHIP).isPresent()) {
-            editNokDescriptor.setRelationship(ParserUtil.parseRelationship(argMultimap.getValue(PREFIX_RELATIONSHIP).get()));
+            editNokDescriptor.setRelationship(ParserUtil.parseRelationship(argMultimap
+                    .getValue(PREFIX_RELATIONSHIP).get()));
         }
 
         if (!editNokDescriptor.isAnyFieldEdited()) {

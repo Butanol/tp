@@ -1,5 +1,13 @@
 package seedu.noknock.logic.commands;
 
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 import seedu.noknock.commons.core.index.Index;
 import seedu.noknock.commons.util.CollectionUtil;
 import seedu.noknock.commons.util.ToStringBuilder;
@@ -11,16 +19,6 @@ import seedu.noknock.model.person.NextOfKin;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.person.Phone;
 import seedu.noknock.model.person.Relationship;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
-import static java.util.Optional.ofNullable;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
 
 /**
  * Adds a next of kin to an existing patient.
@@ -57,8 +55,8 @@ public class EditNextOfKinCommand extends Command {
      * @param editNokDescriptor     Edited Next of Kin.
      */
     public EditNextOfKinCommand(Index patientIndex, Index nokIndex, EditNokDescriptor editNokDescriptor) {
-        requireNonNull(patientIndex);
-        requireNonNull(editNokDescriptor);
+        Objects.requireNonNull(patientIndex);
+        Objects.requireNonNull(editNokDescriptor);
         this.patientIndex = patientIndex;
         this.nokIndex = nokIndex;
         this.editNokDescriptor = new EditNokDescriptor(editNokDescriptor);
@@ -76,7 +74,7 @@ public class EditNextOfKinCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        Objects.requireNonNull(model);
         List<Patient> patientList = model.getFilteredPersonList();
 
         if (patientIndex.getZeroBased() >= patientList.size()) {
@@ -117,6 +115,11 @@ public class EditNextOfKinCommand extends Command {
             .add("editNokDescriptor", editNokDescriptor)
             .toString();
     }
+
+    /**
+     * Stores the details to edit the Nok with. Each non-empty field value will replace the
+     * corresponding field value of the Nok.
+     */
     public static class EditNokDescriptor {
         private Name name;
         private Phone phone;
@@ -143,7 +146,7 @@ public class EditNextOfKinCommand extends Command {
         }
 
         public Optional<Name> getName() {
-            return ofNullable(name);
+            return Optional.ofNullable(name);
         }
 
         public void setName(Name name) {
@@ -151,14 +154,14 @@ public class EditNextOfKinCommand extends Command {
         }
 
         public Optional<Phone> getPhone() {
-            return ofNullable(phone);
+            return Optional.ofNullable(phone);
         }
 
         public void setPhone(Phone phone) {
             this.phone = phone;
         }
         public Optional<Relationship> getRelationship() {
-            return ofNullable(relationship);
+            return Optional.ofNullable(relationship);
         }
 
         public void setRelationship(Relationship relationship) {
