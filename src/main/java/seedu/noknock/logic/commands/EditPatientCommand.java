@@ -16,6 +16,7 @@ import seedu.noknock.model.tag.Tag;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -62,7 +63,7 @@ public class EditPatientCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -89,7 +90,7 @@ public class EditPatientCommand extends Command {
 
         Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
         Ward updatedWard = editPatientDescriptor.getWard().orElse(patientToEdit.getWard());
-        IC updatedIc = editPatientDescriptor.getIc().orElse(patientToEdit.getIc());
+        IC updatedIc = editPatientDescriptor.getIc().orElse(patientToEdit.getIC());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
         return new Patient(updatedName, updatedWard, updatedIc, updatedTags);
