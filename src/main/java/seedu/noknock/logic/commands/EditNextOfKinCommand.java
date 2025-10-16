@@ -1,9 +1,12 @@
 package seedu.noknock.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -55,8 +58,8 @@ public class EditNextOfKinCommand extends Command {
      * @param editNokDescriptor     Edited Next of Kin.
      */
     public EditNextOfKinCommand(Index patientIndex, Index nokIndex, EditNokDescriptor editNokDescriptor) {
-        Objects.requireNonNull(patientIndex);
-        Objects.requireNonNull(editNokDescriptor);
+        requireNonNull(patientIndex);
+        requireNonNull(editNokDescriptor);
         this.patientIndex = patientIndex;
         this.nokIndex = nokIndex;
         this.editNokDescriptor = new EditNokDescriptor(editNokDescriptor);
@@ -74,7 +77,7 @@ public class EditNextOfKinCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Objects.requireNonNull(model);
+        requireNonNull(model);
         List<Patient> patientList = model.getFilteredPersonList();
 
         if (patientIndex.getZeroBased() >= patientList.size()) {
@@ -84,13 +87,19 @@ public class EditNextOfKinCommand extends Command {
         Patient patient = patientList.get(patientIndex.getZeroBased());
         List<NextOfKin> nokList = patient.getNextOfKinList();
 
-        if (nokIndex.getZeroBased() >= nokList.size()) {
+        if (nokIndex.getZeroBased() >= nokList.size() || nokIndex.getZeroBased() < 0) {
             throw new CommandException(Messages.MESSAGE_INVALID_NOK_DISPLAYED_INDEX);
         }
 
         NextOfKin nokToEdit = nokList.get(nokIndex.getZeroBased());
         NextOfKin editedNok = createEditedNok(nokToEdit, editNokDescriptor);
-        nokList.set(nokIndex.getZeroBased(), editedNok);
+
+        List<NextOfKin> updatedNokList = new ArrayList<>(nokList);
+        updatedNokList.set(nokIndex.getZeroBased(), editedNok);
+
+        Patient editedPatient = patient.withNextOfKinList(updatedNokList);
+        model.setPerson(patient, editedPatient);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_NOK_SUCCESS,
             Messages.format(editedNok), Messages.format(patient)));
@@ -101,11 +110,12 @@ public class EditNextOfKinCommand extends Command {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof EditNextOfKinCommand otherAddCommand)) {
+        if (!(other instanceof EditNextOfKinCommand otherEditCommand)) {
             return false;
         }
-        return patientIndex.equals(otherAddCommand.patientIndex)
-            && editNokDescriptor.equals(otherAddCommand.editNokDescriptor);
+        return patientIndex.equals(otherEditCommand.patientIndex)
+            && nokIndex.equals(otherEditCommand.nokIndex)
+            && editNokDescriptor.equals(otherEditCommand.editNokDescriptor);
     }
 
     @Override

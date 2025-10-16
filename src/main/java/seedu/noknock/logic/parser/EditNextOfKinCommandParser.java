@@ -20,19 +20,21 @@ public class EditNextOfKinCommandParser implements Parser<EditNextOfKinCommand> 
      * and returns an EditPatientCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public EditNextOfKinCommand parse(String args) throws ParseException {
         Objects.requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_RELATIONSHIP);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_RELATIONSHIP);
 
         Index patientIndex;
         Index nokIndex;
 
         try {
-            String[] indices = argMultimap.getPreamble().split(" ");
+            String trimmedPreamble = argMultimap.getPreamble().trim();
+            String[] indices = trimmedPreamble.split("\\s+");
             if (indices.length != 2) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditNextOfKinCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditNextOfKinCommand.MESSAGE_USAGE));
             }
             patientIndex = ParserUtil.parseIndex(indices[0]);
             nokIndex = ParserUtil.parseIndex(indices[1]);
@@ -54,7 +56,7 @@ public class EditNextOfKinCommandParser implements Parser<EditNextOfKinCommand> 
         }
         if (argMultimap.getValue(PREFIX_RELATIONSHIP).isPresent()) {
             editNokDescriptor.setRelationship(ParserUtil.parseRelationship(argMultimap
-                    .getValue(PREFIX_RELATIONSHIP).get()));
+                .getValue(PREFIX_RELATIONSHIP).get()));
         }
 
         if (!editNokDescriptor.isAnyFieldEdited()) {
