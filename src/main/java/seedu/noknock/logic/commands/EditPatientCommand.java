@@ -1,6 +1,19 @@
 package seedu.noknock.logic.commands;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_IC;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_WARD;
+import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.noknock.commons.core.index.Index;
 import seedu.noknock.commons.util.CollectionUtil;
 import seedu.noknock.commons.util.ToStringBuilder;
@@ -10,36 +23,24 @@ import seedu.noknock.model.Model;
 import seedu.noknock.model.person.IC;
 import seedu.noknock.model.person.Name;
 import seedu.noknock.model.person.Patient;
-import seedu.noknock.model.person.Person;
 import seedu.noknock.model.person.Ward;
 import seedu.noknock.model.tag.Tag;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_IC;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_WARD;
-import static seedu.noknock.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
+/**
+ * Edits the details of an existing patient in the address book.
+ */
 public class EditPatientCommand extends Command {
     public static final String COMMAND_WORD = "edit-patient";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
-            + "by the index number used in the displayed patient list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_IC + "IC]"
-            + "[" + PREFIX_WARD + "WARD"
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 ";
+        + "by the index number used in the displayed patient list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_IC + "IC]"
+        + "[" + PREFIX_WARD + "WARD"
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -49,7 +50,7 @@ public class EditPatientCommand extends Command {
     private final EditPatientCommand.EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index of the patient in the filtered person list to edit
+     * @param index                 of the patient in the filtered person list to edit
      * @param editPatientDescriptor details to edit the patient with
      */
     public EditPatientCommand(Index index, EditPatientCommand.EditPatientDescriptor editPatientDescriptor) {
@@ -58,27 +59,6 @@ public class EditPatientCommand extends Command {
 
         this.index = index;
         this.editPatientDescriptor = new EditPatientCommand.EditPatientDescriptor(editPatientDescriptor);
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Patient patientToEdit = (Patient) lastShownList.get(index.getZeroBased());
-        Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
-
-        if (!patientToEdit.isSamePerson(editedPatient) && model.hasPerson(editedPatient)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setPerson(patientToEdit, editedPatient);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient)));
     }
 
     /**
@@ -97,6 +77,27 @@ public class EditPatientCommand extends Command {
     }
 
     @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Patient> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Patient patientToEdit = lastShownList.get(index.getZeroBased());
+        Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
+
+        if (!patientToEdit.isSamePerson(editedPatient) && model.hasPerson(editedPatient)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setPerson(patientToEdit, editedPatient);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPatient)));
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -108,15 +109,15 @@ public class EditPatientCommand extends Command {
         }
 
         return index.equals(otherEditPatientCommand.index)
-                && editPatientDescriptor.equals(otherEditPatientCommand.editPatientDescriptor);
+            && editPatientDescriptor.equals(otherEditPatientCommand.editPatientDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPatientDescriptor", editPatientDescriptor)
-                .toString();
+            .add("index", index)
+            .add("editPatientDescriptor", editPatientDescriptor)
+            .toString();
     }
 
     /**
@@ -129,7 +130,8 @@ public class EditPatientCommand extends Command {
         private IC ic;
         private Set<Tag> tags;
 
-        public EditPatientDescriptor() {}
+        public EditPatientDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -149,36 +151,28 @@ public class EditPatientCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, ic, ward, tags);
         }
 
-        public void setName(Name name) {
-            this.name = name;
-        }
-
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
-        public void setWard(Ward ward) {
-            this.ward = ward;
+        public void setName(Name name) {
+            this.name = name;
         }
 
         public Optional<Ward> getWard() {
             return Optional.ofNullable(ward);
         }
 
-        public void setIc(IC ic) {
-            this.ic = ic;
+        public void setWard(Ward ward) {
+            this.ward = ward;
         }
 
         public Optional<IC> getIc() {
             return Optional.ofNullable(ic);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setIc(IC ic) {
+            this.ic = ic;
         }
 
         /**
@@ -188,6 +182,14 @@ public class EditPatientCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         @Override
@@ -202,19 +204,19 @@ public class EditPatientCommand extends Command {
             }
 
             return Objects.equals(name, otherEditPatientDescriptor.name)
-                    && Objects.equals(ic, otherEditPatientDescriptor.ic)
-                    && Objects.equals(ward, otherEditPatientDescriptor.ward)
-                    && Objects.equals(tags, otherEditPatientDescriptor.tags);
+                && Objects.equals(ic, otherEditPatientDescriptor.ic)
+                && Objects.equals(ward, otherEditPatientDescriptor.ward)
+                && Objects.equals(tags, otherEditPatientDescriptor.tags);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("ward", ward)
-                    .add("ic", ic)
-                    .add("tags", tags)
-                    .toString();
+                .add("name", name)
+                .add("ward", ward)
+                .add("ic", ic)
+                .add("tags", tags)
+                .toString();
         }
     }
 }

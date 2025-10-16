@@ -1,15 +1,5 @@
 package seedu.noknock.logic.parser;
 
-import seedu.noknock.commons.core.index.Index;
-import seedu.noknock.logic.commands.EditPatientCommand;
-import seedu.noknock.logic.parser.exceptions.ParseException;
-import seedu.noknock.model.tag.Tag;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.noknock.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_IC;
@@ -17,7 +7,25 @@ import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_WARD;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
+
+import seedu.noknock.commons.core.index.Index;
+import seedu.noknock.logic.commands.EditPatientCommand;
+import seedu.noknock.logic.parser.exceptions.ParseException;
+import seedu.noknock.model.tag.Tag;
+
+/**
+ * Parses input arguments and creates a new EditPatientCommand object
+ */
 public class EditPatientCommandParser implements Parser<EditPatientCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the EditPatientCommand
+     * and returns an EditPatientCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public EditPatientCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -28,7 +36,8 @@ public class EditPatientCommandParser implements Parser<EditPatientCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPatientCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPatientCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_IC, PREFIX_WARD);
@@ -67,5 +76,4 @@ public class EditPatientCommandParser implements Parser<EditPatientCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }

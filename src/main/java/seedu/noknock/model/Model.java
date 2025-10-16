@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.noknock.commons.core.GuiSettings;
 import seedu.noknock.model.person.Patient;
-import seedu.noknock.model.person.Person;
 
 /**
  * The API of the Model component.
