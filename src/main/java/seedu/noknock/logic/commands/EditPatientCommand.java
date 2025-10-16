@@ -210,8 +210,8 @@ public class EditPatientCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("ic", ic)
                     .add("ward", ward)
+                    .add("ic", ic)
                     .add("tags", tags)
                     .toString();
         }
