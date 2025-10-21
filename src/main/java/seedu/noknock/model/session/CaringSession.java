@@ -34,6 +34,25 @@ public final class CaringSession {
     }
 
     /**
+     * Constructs a CaringSession with all fields specified.
+     * Only used for immutably editing an existing session.
+     *
+     * @param careType the type of care provided
+     * @param note     additional notes for the session
+     * @param date     the date of the session
+     * @param time     the time of the session
+     * @param status   the status of the session
+     */
+    public CaringSession(CareType careType, Note note, Date date, Time time, SessionStatus status) {
+        requireAllNonNull(careType, note, date, time, status);
+        this.careType = careType;
+        this.note = note;
+        this.date = date;
+        this.time = time;
+        this.status = status;
+    }
+
+    /**
      * Returns the care type for this session.
      */
     public CareType getCareType() {
