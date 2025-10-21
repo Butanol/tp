@@ -207,7 +207,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String type} into a {@code String}.
+     * Parses a {@code String type} into a {@code Time}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code type} is invalid.
@@ -222,7 +222,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String type} into a {@code String}.
+     * Parses a {@code String type} into a {@code CareType}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code type} is invalid.
@@ -231,13 +231,13 @@ public class ParserUtil {
         requireNonNull(type);
         String trimmedType = type.trim();
         if (!CareType.isValidCareType(trimmedType)) {
-            throw new ParseException("Caring session type cannot be empty.");
+            throw new ParseException(CareType.MESSAGE_CONSTRAINTS);
         }
         return new CareType(trimmedType);
     }
 
     /**
-     * Parses a {@code String note} into a {@code String}.
+     * Parses a {@code String note} into a {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code note} is invalid.
@@ -246,13 +246,13 @@ public class ParserUtil {
         requireNonNull(note);
         String trimmedNote = note.trim();
         if (!Note.isValidNote(trimmedNote)) {
-            throw new ParseException("Caring session note cannot be empty.");
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         return new Note(trimmedNote);
     }
 
     /**
-     * Parses a {@code String status} into a {@code String}.
+     * Parses a {@code String status} into a {@code SessionStatus}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code status} is invalid.
@@ -261,7 +261,7 @@ public class ParserUtil {
         requireNonNull(status);
         String trimmedStatus = status.trim();
         if (!SessionStatus.isValidSessionStatus(trimmedStatus)) {
-            throw new ParseException("Caring session status cannot be empty.");
+            throw new ParseException(SessionStatus.MESSAGE_CONSTRAINTS);
         }
         return SessionStatus.of(trimmedStatus);
     }
