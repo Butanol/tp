@@ -20,6 +20,7 @@ import seedu.noknock.model.person.Relationship;
 import seedu.noknock.model.person.Ward;
 import seedu.noknock.model.session.CareType;
 import seedu.noknock.model.session.Note;
+import seedu.noknock.model.session.SessionStatus;
 import seedu.noknock.model.tag.Tag;
 
 /**
@@ -30,9 +31,10 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * @param ward
-     * @return
-     * @throws ParseException
+     * Parses a {@code String ward} into a {@code Ward}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code ward} is invalid.
      */
     public static Ward parseWard(String ward) throws ParseException {
         requireNonNull(ward);
@@ -225,10 +227,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code type} is invalid.
      */
-    public static CareType parseType(String type) throws ParseException {
+    public static CareType parseCareType(String type) throws ParseException {
         requireNonNull(type);
         String trimmedType = type.trim();
-        if (trimmedType.isEmpty()) {
+        if (!CareType.isValidCareType(trimmedType)) {
             throw new ParseException("Caring session type cannot be empty.");
         }
         return new CareType(trimmedType);
@@ -243,9 +245,24 @@ public class ParserUtil {
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
         String trimmedNote = note.trim();
-        if (trimmedNote.isEmpty()) {
+        if (!Note.isValidNote(trimmedNote)) {
             throw new ParseException("Caring session note cannot be empty.");
         }
         return new Note(trimmedNote);
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static SessionStatus parseSessionStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        if (!SessionStatus.isValidSessionStatus(trimmedStatus)) {
+            throw new ParseException("Caring session status cannot be empty.");
+        }
+        return SessionStatus.of(trimmedStatus);
     }
 }
