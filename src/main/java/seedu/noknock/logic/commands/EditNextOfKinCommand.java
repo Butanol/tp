@@ -24,7 +24,7 @@ import seedu.noknock.model.person.Phone;
 import seedu.noknock.model.person.Relationship;
 
 /**
- * Adds a next of kin to an existing patient.
+ * Edits the details of an existing next of kin of a patient in the address book.
  */
 public class EditNextOfKinCommand extends Command {
 
@@ -53,9 +53,9 @@ public class EditNextOfKinCommand extends Command {
     /**
      * Creates an AddNextOfKinCommand to add the specified next of kin to a patient.
      *
-     * @param patientIndex Index of the patient in the filtered patient list.
-     * @param nokIndex Index of the NOK in the NOK List
-     * @param editNokDescriptor     Edited Next of Kin.
+     * @param patientIndex      Index of the patient in the filtered patient list.
+     * @param nokIndex          Index of the NOK in the NOK List
+     * @param editNokDescriptor Edited Next of Kin.
      */
     public EditNextOfKinCommand(Index patientIndex, Index nokIndex, EditNokDescriptor editNokDescriptor) {
         requireNonNull(patientIndex);
@@ -170,6 +170,7 @@ public class EditNextOfKinCommand extends Command {
         public void setPhone(Phone phone) {
             this.phone = phone;
         }
+
         public Optional<Relationship> getRelationship() {
             return Optional.ofNullable(relationship);
         }
@@ -190,17 +191,17 @@ public class EditNextOfKinCommand extends Command {
             }
 
             return Objects.equals(name, otherEditNokDescriptor.name)
-                    && Objects.equals(phone, otherEditNokDescriptor.phone)
-                    && Objects.equals(relationship, otherEditNokDescriptor.relationship);
+                && Objects.equals(phone, otherEditNokDescriptor.phone)
+                && Objects.equals(relationship, otherEditNokDescriptor.relationship);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("relationship", relationship)
-                    .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("relationship", relationship)
+                .toString();
         }
     }
 }
