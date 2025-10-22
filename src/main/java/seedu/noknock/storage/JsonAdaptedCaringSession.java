@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.noknock.commons.exceptions.IllegalValueException;
 import seedu.noknock.model.date.Date;
 import seedu.noknock.model.date.Time;
-import seedu.noknock.model.person.Relationship;
 import seedu.noknock.model.session.CareType;
 import seedu.noknock.model.session.CaringSession;
 import seedu.noknock.model.session.Note;
