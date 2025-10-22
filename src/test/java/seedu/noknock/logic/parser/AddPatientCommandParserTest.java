@@ -39,7 +39,7 @@ import seedu.noknock.model.person.Ward;
 import seedu.noknock.model.tag.Tag;
 import seedu.noknock.testutil.PatientBuilder;
 
-public class AddCommandParserTest {
+public class AddPatientCommandParserTest {
     private AddPatientCommandParser parser = new AddPatientCommandParser();
 
     @Test

@@ -19,25 +19,11 @@ import seedu.noknock.model.tag.Tag;
  * This class is immutable except for the modifiable lists.
  */
 public final class Patient extends Person {
-    public static final String DEFAULT_IC = "S0000000A";
-    public static final String DEFAULT_WARD = "1N";
-
     private final IC ic;
     private final Ward ward;
     private final List<NextOfKin> nextOfKinList = new ArrayList<>();
     private final List<CaringSession> caringSessionList = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
-
-    /**
-     * Constructs a {@code Patient} with the given name and default ward/IC.
-     *
-     * @param name Patient's name.
-     */
-    public Patient(Name name) {
-        super(name);
-        this.ic = new IC(DEFAULT_IC);
-        this.ward = new Ward(DEFAULT_WARD);
-    }
 
     /**
      * Constructs a {@code Patient} with the given details.

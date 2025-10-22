@@ -13,7 +13,7 @@ import seedu.noknock.model.person.Patient;
 
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a patient identified using it's displayed index from the address book.
  */
 public class DeletePatientCommand extends Command {
 
@@ -38,7 +38,7 @@ public class DeletePatientCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
         int zeroBasedIndex = targetIndex.getZeroBased();
         if (zeroBasedIndex >= lastShownList.size() || zeroBasedIndex < 0) {
@@ -50,8 +50,9 @@ public class DeletePatientCommand extends Command {
             throw new CommandException(String.format(MESSAGE_PATIENT_NOT_FOUND, targetIndex.getOneBased()));
         }
 
-        model.deletePerson(patientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.formatPerson(patientToDelete)));
+        model.deletePatient(patientToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS,
+                Messages.formatPatient(patientToDelete)));
     }
 
     @Override

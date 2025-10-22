@@ -25,7 +25,7 @@ import seedu.noknock.model.ReadOnlyUserPrefs;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.testutil.PatientBuilder;
 
-public class AddCommandTest {
+public class AddPatientCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -39,7 +39,7 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddPatientCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddPatientCommand.MESSAGE_SUCCESS, Messages.formatPerson(validPerson)),
+        assertEquals(String.format(AddPatientCommand.MESSAGE_SUCCESS, Messages.formatPatient(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -50,7 +50,7 @@ public class AddCommandTest {
         AddPatientCommand addCommand = new AddPatientCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddPatientCommand.MESSAGE_DUPLICATE_PERSON, () ->
+        assertThrows(CommandException.class, AddPatientCommand.MESSAGE_DUPLICATE_PATIENT, () ->
                 addCommand.execute(modelStub));
     }
 
@@ -120,7 +120,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Patient person) {
+        public void addPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -135,27 +135,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Patient person) {
+        public boolean hasPatient(Patient person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Patient target) {
+        public void deletePatient(Patient target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Patient target, Patient editedPerson) {
+        public void setPatient(Patient target, Patient editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Patient> getFilteredPersonList() {
+        public ObservableList<Patient> getFilteredPatientList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Patient> predicate) {
+        public void updateFilteredPatientList(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -172,7 +172,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Patient person) {
+        public boolean hasPatient(Patient person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
@@ -185,13 +185,13 @@ public class AddCommandTest {
         final ArrayList<Patient> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Patient person) {
+        public boolean hasPatient(Patient person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
         }
 
         @Override
-        public void addPerson(Patient person) {
+        public void addPatient(Patient person) {
             requireNonNull(person);
             personsAdded.add(person);
         }

@@ -45,7 +45,7 @@ public class DeleteNextOfKinCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> patientList = model.getFilteredPersonList();
+        List<Patient> patientList = model.getFilteredPatientList();
 
         if (patientIndex.getZeroBased() >= patientList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
@@ -63,10 +63,10 @@ public class DeleteNextOfKinCommand extends Command {
         updatedNokList.remove(nokToDelete);
 
         Patient editedPatient = patient.withNextOfKinList(updatedNokList);
-        model.setPerson(patient, editedPatient);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setPatient(patient, editedPatient);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_NOK_SUCCESS, Messages.formatPerson(nokToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_NOK_SUCCESS, Messages.formatPatient(nokToDelete)));
     }
 
     @Override

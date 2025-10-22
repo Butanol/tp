@@ -18,7 +18,7 @@ public class ListPatientsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(new IsPatientPredicate());
+        model.updateFilteredPatientList(new IsPatientPredicate());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

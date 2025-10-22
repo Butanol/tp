@@ -9,7 +9,7 @@ import java.util.Objects;
  * Guarantees: immutable; is valid as declared in {@link #isValidNote(String)}
  */
 public class Note {
-
+    public static final String DEFAULT_NONE = "NIL";
     public static final String MESSAGE_CONSTRAINTS =
         "Note can be null or up to 200 characters long";
 
@@ -36,6 +36,9 @@ public class Note {
 
     @Override
     public String toString() {
+        if (value.isEmpty()) {
+            return DEFAULT_NONE;
+        }
         return value;
     }
 

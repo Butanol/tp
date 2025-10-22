@@ -14,12 +14,13 @@ import seedu.noknock.model.person.Name;
 import seedu.noknock.model.person.NextOfKin;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.person.Ward;
+import seedu.noknock.model.session.CaringSession;
 import seedu.noknock.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Patient}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedPatient {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -28,15 +29,17 @@ class JsonAdaptedPerson {
     private final String ic;
     private final List<JsonAdaptedNextOfKin> nextOfKins = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedCaringSession> caringSessions = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPatient} with the given patient details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("ward") String ward,
-                             @JsonProperty("ic") String ic,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("nextOfKins") List<JsonAdaptedNextOfKin> nextOfKins) {
+    public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("ward") String ward,
+                              @JsonProperty("ic") String ic,
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("nextOfKins") List<JsonAdaptedNextOfKin> nextOfKins,
+                              @JsonProperty("sessions") List<JsonAdaptedCaringSession> sessions) {
         this.name = name;
         this.ward = ward;
         this.ic = ic;
@@ -46,12 +49,15 @@ class JsonAdaptedPerson {
         if (nextOfKins != null) {
             this.nextOfKins.addAll(nextOfKins);
         }
+        if (sessions != null) {
+            this.caringSessions.addAll(sessions);
+        }
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Patient} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Patient source) {
+    public JsonAdaptedPatient(Patient source) {
         name = source.getName().fullName;
         ic = source.getIC().toString();
         ward = source.getWard().toString();
@@ -60,6 +66,9 @@ class JsonAdaptedPerson {
             .toList());
         nextOfKins.addAll(source.getNextOfKinList().stream()
             .map(JsonAdaptedNextOfKin::new)
+            .toList());
+        caringSessions.addAll(source.getCaringSessionList().stream()
+            .map(JsonAdaptedCaringSession::new)
             .toList());
     }
 
@@ -104,7 +113,13 @@ class JsonAdaptedPerson {
         for (JsonAdaptedNextOfKin nok : nextOfKins) {
             personNextOfKins.add(nok.toModelType());
         }
-        return new Patient(modelName, modelWard, modelIC, modelTags).withNextOfKinList(personNextOfKins);
+        final List<CaringSession> modelCaringSessions = new ArrayList<>();
+        for (JsonAdaptedCaringSession nok : caringSessions) {
+            modelCaringSessions.add(nok.toModelType());
+        }
+        return new Patient(modelName, modelWard, modelIC, modelTags)
+                .withNextOfKinList(personNextOfKins)
+                .withCaringSessionList(modelCaringSessions);
     }
 
 }

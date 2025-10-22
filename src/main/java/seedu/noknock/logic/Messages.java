@@ -37,7 +37,7 @@ public class Messages {
     /**
      * Formats the {@code person} for display to the user.
      */
-    public static String formatPerson(Person person) {
+    public static String formatPatient(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName());
         return builder.toString();

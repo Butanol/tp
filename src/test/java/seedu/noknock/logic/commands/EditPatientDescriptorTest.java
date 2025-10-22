@@ -12,7 +12,7 @@ import static seedu.noknock.logic.commands.CommandTestUtil.VALID_WARD_BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.noknock.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.noknock.testutil.EditPatientDescriptorBuilder;
 
 public class EditPatientDescriptorTest {
@@ -20,7 +20,7 @@ public class EditPatientDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_AMY);
+        EditPatientDescriptor descriptorWithSameValues = new EditPatientDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -36,7 +36,7 @@ public class EditPatientDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditPersonDescriptor editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditPatientDescriptor editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
@@ -54,8 +54,8 @@ public class EditPatientDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
+        EditPatientDescriptor editPersonDescriptor = new EditPatientDescriptor();
+        String expected = EditPatientDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", ward="
                 + editPersonDescriptor.getWard().orElse(null) + ", ic="
                 + editPersonDescriptor.getIC().orElse(null) + ", tags="

@@ -31,6 +31,7 @@
             <Label fx:id="ward" styleClass="cell_small_label"/>
             <Label fx:id="ic" styleClass="cell_small_label"/>
             <VBox fx:id="nextOfKins" spacing="3" styleClass="cell_small_label"/>
+            <FlowPane fx:id="sessions"/>
         </VBox>
     </GridPane>
 </HBox>

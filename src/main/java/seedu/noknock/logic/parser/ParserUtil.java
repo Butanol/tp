@@ -20,7 +20,6 @@ import seedu.noknock.model.person.Relationship;
 import seedu.noknock.model.person.Ward;
 import seedu.noknock.model.session.CareType;
 import seedu.noknock.model.session.Note;
-import seedu.noknock.model.session.SessionStatus;
 import seedu.noknock.model.tag.Tag;
 
 /**
@@ -31,7 +30,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses a {@code String ward} into a {@code Ward}.
+     * Parses a {@code String ward} into an {@code Ward}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code ward} is invalid.
@@ -192,51 +191,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into a {@code Date}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code date} is invalid.
-     */
-    public static Date parseDate(String date) throws ParseException {
-        requireNonNull(date);
-        String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
-        }
-        return new Date(trimmedDate);
-    }
-
-    /**
-     * Parses a {@code String type} into a {@code Time}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code type} is invalid.
-     */
-    public static Time parseTime(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-        if (!Time.isValidTime(trimmedTime)) {
-            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
-        }
-        return new Time(trimmedTime);
-    }
-
-    /**
-     * Parses a {@code String type} into a {@code CareType}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code type} is invalid.
-     */
-    public static CareType parseCareType(String type) throws ParseException {
-        requireNonNull(type);
-        String trimmedType = type.trim();
-        if (!CareType.isValidCareType(trimmedType)) {
-            throw new ParseException(CareType.MESSAGE_CONSTRAINTS);
-        }
-        return new CareType(trimmedType);
-    }
-
-    /**
      * Parses a {@code String note} into a {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -250,19 +204,46 @@ public class ParserUtil {
         }
         return new Note(trimmedNote);
     }
-
     /**
-     * Parses a {@code String status} into a {@code SessionStatus}.
+     * Parses a {@code String careType} into an {@code CareType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code status} is invalid.
+     * @throws ParseException if the given {@code careType} is invalid.
      */
-    public static SessionStatus parseSessionStatus(String status) throws ParseException {
-        requireNonNull(status);
-        String trimmedStatus = status.trim();
-        if (!SessionStatus.isValidSessionStatus(trimmedStatus)) {
-            throw new ParseException(SessionStatus.MESSAGE_CONSTRAINTS);
+    public static CareType parseType(String careType) throws ParseException {
+        requireNonNull(careType);
+        String trimmedType = careType.trim();
+        if (!CareType.isValidCareType(trimmedType)) {
+            throw new ParseException(CareType.MESSAGE_CONSTRAINTS);
         }
-        return SessionStatus.of(trimmedStatus);
+        return new CareType(trimmedType);
+    }
+    /**
+     * Parses a {@code String time} into an {@code Time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!Time.isValidTime(trimmedTime)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return new Time(trimmedTime);
+    }
+    /**
+     * Parses a {@code String date} into an {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
     }
 }

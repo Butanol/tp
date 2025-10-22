@@ -14,7 +14,7 @@ import java.util.Set;
 
 import seedu.noknock.commons.core.index.Index;
 import seedu.noknock.logic.commands.EditCommand;
-import seedu.noknock.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.noknock.logic.parser.exceptions.ParseException;
 import seedu.noknock.model.tag.Tag;
 
@@ -42,7 +42,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_IC, PREFIX_WARD);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditPatientDescriptor editPersonDescriptor = new EditPatientDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));

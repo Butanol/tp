@@ -27,8 +27,8 @@ public class FindPatientCommandTest {
         AddressBook addressBook = new AddressBook();
 
         // two patients
-        addressBook.addPerson(new PatientBuilder().withName("Alice Pauline").build());
-        addressBook.addPerson(new PatientBuilder().withName("Bob Brown").build());
+        addressBook.addPatient(new PatientBuilder().withName("Alice Pauline").build());
+        addressBook.addPatient(new PatientBuilder().withName("Bob Brown").build());
 
         model = new ModelManager(addressBook, new UserPrefs());
     }
@@ -69,7 +69,7 @@ public class FindPatientCommandTest {
         // There are 2 patients added in setUp
         assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 2),
                 result.getFeedbackToUser());
-        assertEquals(2, model.getFilteredPersonList().size());
+        assertEquals(2, model.getFilteredPatientList().size());
     }
 
     @Test
@@ -81,6 +81,6 @@ public class FindPatientCommandTest {
         // Matches "Alice Pauline" via "alice" and "Bob Brown" via "brown"
         assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 2),
                 result.getFeedbackToUser());
-        assertEquals(2, model.getFilteredPersonList().size());
+        assertEquals(2, model.getFilteredPatientList().size());
     }
 }

@@ -28,21 +28,21 @@ public class AddPatientCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Patient validPerson = new PatientBuilder().build();
+        Patient validPatient = new PatientBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addPatient(validPatient);
 
-        assertCommandSuccess(new AddPatientCommand(validPerson), model,
-                String.format(AddPatientCommand.MESSAGE_SUCCESS, Messages.formatPerson(validPerson)),
+        assertCommandSuccess(new AddPatientCommand(validPatient), model,
+                String.format(AddPatientCommand.MESSAGE_SUCCESS, Messages.formatPatient(validPatient)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Patient personInList = model.getAddressBook().getPersonList().get(0);
+        Patient personInList = model.getAddressBook().getPatientList().get(0);
         assertCommandFailure(new AddPatientCommand(personInList), model,
-                AddPatientCommand.MESSAGE_DUPLICATE_PERSON);
+                AddPatientCommand.MESSAGE_DUPLICATE_PATIENT);
     }
 
 }

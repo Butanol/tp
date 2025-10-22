@@ -20,8 +20,8 @@ public class ListPatientsCommandTest {
         AddressBook addressBook = new AddressBook();
 
         // two patients
-        addressBook.addPerson(new PatientBuilder().withName("Alice Pauline").build());
-        addressBook.addPerson(new PatientBuilder().withName("Bob Brown").build());
+        addressBook.addPatient(new PatientBuilder().withName("Alice Pauline").build());
+        addressBook.addPatient(new PatientBuilder().withName("Bob Brown").build());
 
         model = new ModelManager(addressBook, new UserPrefs());
     }
@@ -30,6 +30,6 @@ public class ListPatientsCommandTest {
     public void execute_listPatients_showsOnlyPatients() {
         CommandResult result = new ListPatientsCommand().execute(model);
         assertEquals(ListPatientsCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
-        assertEquals(2, model.getFilteredPersonList().size());
+        assertEquals(2, model.getFilteredPatientList().size());
     }
 }

@@ -168,7 +168,7 @@ public class LogicManagerTest {
                 + IC_DESC_AMY;
         Patient expectedPerson = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addPatient(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

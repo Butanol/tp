@@ -17,7 +17,7 @@ import seedu.noknock.logic.commands.AddPatientCommand;
 import seedu.noknock.logic.commands.ClearCommand;
 import seedu.noknock.logic.commands.DeleteCommand;
 import seedu.noknock.logic.commands.EditCommand;
-import seedu.noknock.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.noknock.logic.commands.ExitCommand;
 import seedu.noknock.logic.commands.FindCommand;
 import seedu.noknock.logic.commands.HelpCommand;
@@ -57,9 +57,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PatientBuilder().build();
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder(person).build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPatientDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

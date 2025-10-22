@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 import seedu.noknock.commons.core.index.Index;
 import seedu.noknock.logic.Messages;
 import seedu.noknock.logic.commands.EditCommand;
-import seedu.noknock.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.noknock.model.person.IC;
 import seedu.noknock.model.person.Name;
 import seedu.noknock.model.person.Ward;
@@ -102,7 +102,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + WARD_DESC_BOB + TAG_DESC_HUSBAND
                 + IC_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withWard(VALID_WARD_BOB).withIC(VALID_IC_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -115,7 +115,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + WARD_DESC_AMY + IC_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withWard(VALID_WARD_AMY)
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withWard(VALID_WARD_AMY)
                 .withIC(VALID_IC_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -127,7 +127,7 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -187,7 +187,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPatientDescriptorBuilder().withTags().build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

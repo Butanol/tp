@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.noknock.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.noknock.model.person.Address;
 import seedu.noknock.model.person.IC;
 import seedu.noknock.model.person.Name;
@@ -14,27 +14,27 @@ import seedu.noknock.model.person.Ward;
 import seedu.noknock.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditPatientDescriptor objects.
  */
 public class EditPatientDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditPatientDescriptor descriptor;
 
     public EditPatientDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditPatientDescriptor();
     }
 
-    public EditPatientDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditPatientDescriptorBuilder(EditPatientDescriptor descriptor) {
+        this.descriptor = new EditPatientDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPatientDescriptor} with fields containing {@code person}'s details
      */
     public EditPatientDescriptorBuilder(Person person) {
         assert person instanceof Patient;
         Patient patient = (Patient) person;
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditPatientDescriptor();
         descriptor.setName(patient.getName());
         descriptor.setWard(patient.getWard());
         descriptor.setIC(patient.getIC());
@@ -42,7 +42,7 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -50,7 +50,7 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withWard(String ward) {
         descriptor.setWard(new Ward(ward));
@@ -58,7 +58,7 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withIC(String ic) {
         descriptor.setIC(new IC(ic));
@@ -66,7 +66,7 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditPatientDescriptor} that we are building.
      */
     public EditPatientDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
@@ -74,7 +74,7 @@ public class EditPatientDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPatientDescriptor}
      * that we are building.
      */
     public EditPatientDescriptorBuilder withTags(String... tags) {
@@ -83,7 +83,7 @@ public class EditPatientDescriptorBuilder {
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditPatientDescriptor build() {
         return descriptor;
     }
 }

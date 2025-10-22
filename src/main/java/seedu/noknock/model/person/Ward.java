@@ -8,15 +8,14 @@ package seedu.noknock.model.person;
  *
  */
 public class Ward {
-    public static final String REGEX_PATTERN = "\\d+[a-zA-Z]";
+    public static final String REGEX_PATTERN = "[1-9]\\d*[a-zA-Z]";
     public static final String MESSAGE_CONSTRAINTS = "Ward number must be a positive integer "
         + "followed by an alphabet. E.g. 2A";
 
     private final String room;
 
     /**
-     * Return a Ward object
-     *
+     * Returns a Ward object
      * @param room
      */
     public Ward(String room) {

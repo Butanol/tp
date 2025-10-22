@@ -7,26 +7,45 @@ import java.util.Objects;
 import seedu.noknock.commons.util.ToStringBuilder;
 
 /**
- * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a generic person in the system.
+ * This is an abstract base class for {@link Patient} and {@link NextOfKin}.
+ *
+ * <p>Identity is defined by the {@link Name} field. All person instances are
+ * guaranteed to have a non-null, validated name. Subclasses may introduce
+ * additional fields (e.g., ward, IC, relationship) but this class enforces
+ * the core identity contract.</p>
+ *
+ * <p>Immutability: All fields in this class are immutable. Any extending subclass
+ * should preserve immutability wherever possible.</p>
  */
 public abstract class Person {
-    // Identity fields
+    /** The unique name representing the identity of this person. */
     private final Name name;
+
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Person} with the given {@code Name}.
+     * The provided name must not be null.
+     *
+     * @param name a valid, non-null {@link Name} object.
      */
     public Person(Name name) {
         requireAllNonNull(name);
         this.name = name;
     }
 
+    /**
+     * Returns the {@link Name} of this person.
+     */
     public Name getName() {
         return name;
     }
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns {@code true} if both persons have the same {@link Name}.
+     * This provides a weaker notion of equality, used for detecting potential duplicates
+     * without requiring all data fields to match.
+     *
+     * @param otherPerson the other person to compare against.
+     * @return true if both represent the same person by name, false otherwise.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -38,8 +57,9 @@ public abstract class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns {@code true} if both objects are {@code Person} instances with the same
+     * identity fields. This defines a stronger notion of equality and is used for exact
+     * matching (e.g., in data structures or unit tests).
      */
     @Override
     public boolean equals(Object other) {

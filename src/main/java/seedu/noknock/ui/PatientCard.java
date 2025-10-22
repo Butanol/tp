@@ -9,13 +9,14 @@ import javafx.scene.layout.VBox;
 import seedu.noknock.model.person.NextOfKin;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.person.Person;
+import seedu.noknock.model.session.CaringSession;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Patient}.
  */
-public class PersonCard extends UiPart<Region> {
+public class PatientCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "PatientListCard.fxml";
 
     public final Person person;
 
@@ -35,11 +36,13 @@ public class PersonCard extends UiPart<Region> {
     private VBox nextOfKins;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane sessions;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PatientCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -61,6 +64,17 @@ public class PersonCard extends UiPart<Region> {
                     nok.getPhone().toString()));
                 nokLabel.setWrapText(true);
                 nextOfKins.getChildren().add(nokLabel);
+            }
+            int sessionIndex = 1;
+            for (CaringSession session : patient.getCaringSessionList()) {
+                Label sessionLabel = new Label(String.format("%d. Date: %s Time: %s Type: %s (Notes: %s) ",
+                        sessionIndex++,
+                        session.getDate(),
+                        session.getTime(),
+                        session.getCareType(),
+                        session.getNote()));
+                sessionLabel.setWrapText(true);
+                sessions.getChildren().add(sessionLabel);
             }
         }
     }

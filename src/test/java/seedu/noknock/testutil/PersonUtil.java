@@ -8,7 +8,7 @@ import static seedu.noknock.logic.parser.CliSyntax.PREFIX_WARD;
 import java.util.Set;
 
 import seedu.noknock.logic.commands.AddPatientCommand;
-import seedu.noknock.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.tag.Tag;
 
@@ -39,9 +39,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditPatientDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPatientDescriptorDetails(EditPatientDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getWard().ifPresent(ward -> sb.append(PREFIX_WARD).append(ward).append(" "));
