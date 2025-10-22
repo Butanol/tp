@@ -30,6 +30,7 @@ public class AddCaringSessionCommandParser implements Parser<AddCaringSessionCom
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCaringSessionCommand
      * and returns an AddCaringSessionCommand object for execution.
@@ -52,15 +53,15 @@ public class AddCaringSessionCommandParser implements Parser<AddCaringSessionCom
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_TIME, PREFIX_CARE_TYPE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddCaringSessionCommand.MESSAGE_USAGE));
+                AddCaringSessionCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_TIME, PREFIX_CARE_TYPE, PREFIX_NOTES);
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-        CareType type = ParserUtil.parseType(argMultimap.getValue(PREFIX_CARE_TYPE).get());
-        Optional<String> noteValue = argMultimap.getValue(PREFIX_NOTE);
+        CareType type = ParserUtil.parseCareType(argMultimap.getValue(PREFIX_CARE_TYPE).get());
+        Optional<String> noteValue = argMultimap.getValue(PREFIX_NOTES);
         Note note;
         if (noteValue.isPresent()) {
             note = ParserUtil.parseNote(noteValue.get()); // may throw ParseException

@@ -76,7 +76,7 @@ public class EditCaringSessionCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> patientList = model.getFilteredPersonList();
+        List<Patient> patientList = model.getFilteredPatientList();
 
         if (patientIndex.getZeroBased() >= patientList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
@@ -96,8 +96,8 @@ public class EditCaringSessionCommand extends Command {
         updatedSessionList.set(sessionIndex.getZeroBased(), editedSession);
 
         Patient editedPatient = patient.withCaringSessionList(updatedSessionList);
-        model.setPerson(patient, editedPatient);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setPatient(patient, editedPatient);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_SESSION_SUCCESS,
             editedSession, patient.getName()));
