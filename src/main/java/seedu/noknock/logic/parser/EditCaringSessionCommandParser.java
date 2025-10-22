@@ -3,7 +3,7 @@ package seedu.noknock.logic.parser;
 import static seedu.noknock.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_CARE_TYPE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -21,7 +21,7 @@ public class EditCaringSessionCommandParser implements Parser<EditCaringSessionC
     public EditCaringSessionCommand parse(String args) throws ParseException {
         Objects.requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-            args, PREFIX_CARE_TYPE, PREFIX_NOTE, PREFIX_DATE, PREFIX_TIME, PREFIX_STATUS);
+            args, PREFIX_CARE_TYPE, PREFIX_NOTES, PREFIX_DATE, PREFIX_TIME, PREFIX_STATUS);
 
         Index patientIndex;
         Index sessionIndex;
@@ -41,7 +41,7 @@ public class EditCaringSessionCommandParser implements Parser<EditCaringSessionC
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(
-            PREFIX_CARE_TYPE, PREFIX_NOTE, PREFIX_DATE, PREFIX_TIME, PREFIX_STATUS);
+            PREFIX_CARE_TYPE, PREFIX_NOTES, PREFIX_DATE, PREFIX_TIME, PREFIX_STATUS);
 
         EditCaringSessionCommand.EditSessionDescriptor descriptor =
             new EditCaringSessionCommand.EditSessionDescriptor();
@@ -49,8 +49,8 @@ public class EditCaringSessionCommandParser implements Parser<EditCaringSessionC
         if (argMultimap.getValue(PREFIX_CARE_TYPE).isPresent()) {
             descriptor.setCareType(ParserUtil.parseCareType(argMultimap.getValue(PREFIX_CARE_TYPE).get()));
         }
-        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
-            descriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
+        if (argMultimap.getValue(PREFIX_NOTES).isPresent()) {
+            descriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTES).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             descriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));

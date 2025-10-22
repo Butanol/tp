@@ -3,7 +3,7 @@ package seedu.noknock.logic.parser;
 import static seedu.noknock.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_CARE_TYPE;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.noknock.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.noknock.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.stream.Stream;
@@ -33,7 +33,7 @@ public class AddCaringSessionCommandParser implements Parser<AddCaringSessionCom
     @Override
     public AddCaringSessionCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_TIME, PREFIX_CARE_TYPE, PREFIX_NOTE);
+            ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_TIME, PREFIX_CARE_TYPE, PREFIX_NOTES);
 
         Index patientIndex;
 
@@ -49,12 +49,12 @@ public class AddCaringSessionCommandParser implements Parser<AddCaringSessionCom
                 AddCaringSessionCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_TIME, PREFIX_CARE_TYPE, PREFIX_NOTE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATE, PREFIX_TIME, PREFIX_CARE_TYPE, PREFIX_NOTES);
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
         CareType type = ParserUtil.parseCareType(argMultimap.getValue(PREFIX_CARE_TYPE).get());
-        Note notes = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+        Note notes = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTES).get());
 
         CaringSession session = new CaringSession(type, notes, date, time);
 
