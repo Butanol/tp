@@ -22,7 +22,6 @@ import seedu.noknock.model.ModelManager;
 import seedu.noknock.model.UserPrefs;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.session.CaringSession;
-import seedu.noknock.model.session.SessionStatus;
 import seedu.noknock.testutil.CaringSessionBuilder;
 import seedu.noknock.testutil.EditSessionDescriptorBuilder;
 
