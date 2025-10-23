@@ -1,6 +1,7 @@
 package seedu.noknock.ui;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -10,6 +11,7 @@ import seedu.noknock.model.person.NextOfKin;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.person.Person;
 import seedu.noknock.model.session.CaringSession;
+import seedu.noknock.model.session.Note;
 
 /**
  * An UI component that displays information of a {@code Patient}.
@@ -37,7 +39,7 @@ public class PatientCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane sessions;
+    private VBox sessions;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,8 +49,7 @@ public class PatientCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        if (person instanceof Patient) {
-            Patient patient = (Patient) person;
+        if (person instanceof Patient patient) {
             ic.setText(patient.getIC().toString());
             ward.setText(patient.getWard().toString());
             patient.getTags()
@@ -65,16 +66,39 @@ public class PatientCard extends UiPart<Region> {
                 nokLabel.setWrapText(true);
                 nextOfKins.getChildren().add(nokLabel);
             }
+
+            // Display sessions as numbered list
             int sessionIndex = 1;
             for (CaringSession session : patient.getCaringSessionList()) {
-                Label sessionLabel = new Label(String.format("%d. Date: %s Time: %s Type: %s (Notes: %s) ",
-                        sessionIndex++,
-                        session.getDate(),
-                        session.getTime(),
-                        session.getCareType(),
-                        session.getNote()));
-                sessionLabel.setWrapText(true);
-                sessions.getChildren().add(sessionLabel);
+                Note note = session.getNote();
+                HBox sessionContainer = new HBox(0.5);
+                sessionContainer.setAlignment(Pos.TOP_LEFT);
+
+                // Status indicator
+                Label statusBadge = new Label(session.isComplete() ? "✓" : "✗");
+                statusBadge.setMinWidth(20);
+
+                // Session text
+                VBox sessionContent = new VBox(2);
+                String mainText = String.format("%d. %s - %s at %s",
+                    sessionIndex++,
+                    session.getCareType(),
+                    session.getDate().printPretty(),
+                    session.getTime());
+
+                Label mainLabel = new Label(mainText);
+                mainLabel.setWrapText(true);
+                sessionContent.getChildren().add(mainLabel);
+
+                if (!note.value.isEmpty()) {
+                    Label noteLabel = new Label("   Notes: " + note);
+                    noteLabel.setWrapText(true);
+                    noteLabel.getStyleClass().addAll("cell_small_label", "session-note");
+                    sessionContent.getChildren().add(noteLabel);
+                }
+
+                sessionContainer.getChildren().addAll(statusBadge, sessionContent);
+                sessions.getChildren().add(sessionContainer);
             }
         }
     }

@@ -100,7 +100,7 @@ public class EditCaringSessionCommand extends Command {
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_SESSION_SUCCESS,
-            editedSession, patient.getName()));
+            Messages.formatSession(editedSession), Messages.formatPatient(patient)));
     }
 
     @Override

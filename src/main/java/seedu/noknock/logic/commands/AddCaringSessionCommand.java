@@ -37,8 +37,7 @@ public class AddCaringSessionCommand extends Command {
         + PREFIX_CARE_TYPE + "medication "
         + PREFIX_NOTES + "Give insulin shot ";
 
-    public static final String MESSAGE_ADD_CARING_SESSION_SUCCESS = "Added Caring Session: %1$s at %2$s %3$s "
-        + "(Note: %4$s) to Patient: %5$s";
+    public static final String MESSAGE_ADD_CARING_SESSION_SUCCESS = "Added Caring Session: %1$s to Patient: %2$s";
     public static final String MESSAGE_HAS_OVERLAPPING_SESSION =
         "This session (%1$s) overlaps with an existing session.";
 
@@ -82,7 +81,7 @@ public class AddCaringSessionCommand extends Command {
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_ADD_CARING_SESSION_SUCCESS,
-            sessionToAdd.getCareType(), sessionToAdd.getDate(), sessionToAdd.getTime(), sessionToAdd.getNote(),
+            Messages.formatSession(sessionToAdd),
             Messages.formatPatient(editedPatient)));
     }
 

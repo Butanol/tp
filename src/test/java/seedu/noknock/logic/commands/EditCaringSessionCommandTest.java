@@ -22,6 +22,7 @@ import seedu.noknock.model.ModelManager;
 import seedu.noknock.model.UserPrefs;
 import seedu.noknock.model.person.Patient;
 import seedu.noknock.model.session.CaringSession;
+import seedu.noknock.model.session.SessionStatus;
 import seedu.noknock.testutil.CaringSessionBuilder;
 import seedu.noknock.testutil.EditSessionDescriptorBuilder;
 
@@ -66,7 +67,7 @@ public class EditCaringSessionCommandTest {
         expectedModel.setPatient(patient, editedPatient);
 
         String expectedMessage = String.format(EditCaringSessionCommand.MESSAGE_EDIT_SESSION_SUCCESS,
-            editedSession, patient.getName());
+            Messages.formatSession(editedSession), Messages.formatPatient(patient));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -91,7 +92,7 @@ public class EditCaringSessionCommandTest {
         expectedModel.setPatient(patient, editedPatient);
 
         String expectedMessage = String.format(EditCaringSessionCommand.MESSAGE_EDIT_SESSION_SUCCESS,
-            editedSession, patient.getName());
+            Messages.formatSession(editedSession), Messages.formatPatient(patient));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -114,7 +115,7 @@ public class EditCaringSessionCommandTest {
         expectedModel.setPatient(patient, editedPatient);
 
         String expectedMessage = String.format(EditCaringSessionCommand.MESSAGE_EDIT_SESSION_SUCCESS,
-            sessionToEdit, patient.getName());
+            Messages.formatSession(sessionToEdit), Messages.formatPatient(patient));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

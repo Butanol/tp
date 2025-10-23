@@ -72,6 +72,13 @@ public class Date {
         return null;
     }
 
+    /**
+     * Returns the date in a pretty format: d MMMM yyyy (e.g., 5 January 2023).
+     */
+    public String printPretty() {
+        return value.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+    }
+
     @Override
     public String toString() {
         return value.toString();

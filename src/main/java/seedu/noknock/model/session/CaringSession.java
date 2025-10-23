@@ -88,6 +88,13 @@ public final class CaringSession {
     }
 
     /**
+     * Returns true if the session is marked as complete.
+     */
+    public boolean isComplete() {
+        return status == SessionStatus.COMPLETED;
+    }
+
+    /**
      * Checks if this caring session overlaps with another session.
      * Overlap is defined as having the same date, time, and care type.
      *
@@ -96,8 +103,7 @@ public final class CaringSession {
      */
     public boolean overlaps(CaringSession other) {
         return this.date.equals(other.date)
-            && this.time.equals(other.time)
-            && this.careType.equals(other.careType);
+            && this.time.equals(other.time);
     }
 
     @Override
@@ -129,5 +135,12 @@ public final class CaringSession {
             .add("time", getTime())
             .add("status", getStatus())
             .toString();
+    }
+
+    /**
+     * Returns a user-friendly string representation of the caring session.
+     */
+    public String toDisplayString() {
+        return String.format("[%s] %s on %s at %s (Notes: %s)", status, careType, date.printPretty(), time, note);
     }
 }
