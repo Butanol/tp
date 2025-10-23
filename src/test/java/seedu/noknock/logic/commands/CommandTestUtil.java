@@ -18,6 +18,7 @@ import seedu.noknock.model.AddressBook;
 import seedu.noknock.model.Model;
 import seedu.noknock.model.person.NameContainsKeywordsPredicate;
 import seedu.noknock.model.person.Person;
+import seedu.noknock.testutil.EditNextOfKinDescriptorBuilder;
 import seedu.noknock.testutil.EditPatientDescriptorBuilder;
 
 /**
@@ -33,6 +34,14 @@ public class CommandTestUtil {
     public static final String VALID_IC_BOB = "S1234567B";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_NAME_DAUGHTER = "Sammy";
+    public static final String VALID_NAME_GRANDPA = "James";
+    public static final String VALID_PHONE_DAUGHTER = "11111111";
+    public static final String VALID_PHONE_GRANDPA = "22222222";
+    public static final String VALID_RELATION_DAUGHTER = "Daughter";
+    public static final String VALID_RELATION_GRANDPA = "Grandfather";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -53,6 +62,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPatientDescriptor DESC_AMY;
     public static final EditCommand.EditPatientDescriptor DESC_BOB;
+    public static final EditNextOfKinCommand.EditNextOfKinDescriptor DESC_DAUGHTER;
+    public static final EditNextOfKinCommand.EditNextOfKinDescriptor DESC_GRANDPA;
 
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -61,6 +72,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withWard(VALID_WARD_AMY).withIC(VALID_IC_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_DAUGHTER = new EditNextOfKinDescriptorBuilder().withName(VALID_NAME_DAUGHTER)
+                .withPhone(VALID_PHONE_DAUGHTER).withRelationship(VALID_RELATION_DAUGHTER).build();
+        DESC_GRANDPA = new EditNextOfKinDescriptorBuilder().withName(VALID_NAME_GRANDPA)
+                .withPhone(VALID_PHONE_GRANDPA).withRelationship(VALID_RELATION_GRANDPA).build();
     }
 
     /**
