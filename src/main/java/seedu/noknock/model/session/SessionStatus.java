@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Guarantees: immutable; is valid as declared in {@link #isValidSessionStatus(String)}.
  */
 public enum SessionStatus {
-    COMPLETE("Complete"),
+    COMPLETED("Completed"),
     INCOMPLETE("Incomplete");
 
     public static final String MESSAGE_CONSTRAINTS =
