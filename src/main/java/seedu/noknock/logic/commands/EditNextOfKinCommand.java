@@ -48,29 +48,30 @@ public class EditNextOfKinCommand extends Command {
 
     private final Index patientIndex;
     private final Index nokIndex;
-    private final EditNokDescriptor editNokDescriptor;
+    private final EditNextOfKinDescriptor editNextOfKinDescriptor;
 
     /**
      * Creates an AddNextOfKinCommand to add the specified next of kin to a patient.
      *
-     * @param patientIndex      Index of the patient in the filtered patient list.
-     * @param nokIndex          Index of the NOK in the NOK List
-     * @param editNokDescriptor Edited Next of Kin.
+     * @param patientIndex            Index of the patient in the filtered patient list.
+     * @param nokIndex                Index of the NOK in the NOK List
+     * @param editNextOfKinDescriptor Edited Next of Kin.
      */
-    public EditNextOfKinCommand(Index patientIndex, Index nokIndex, EditNokDescriptor editNokDescriptor) {
+    public EditNextOfKinCommand(Index patientIndex, Index nokIndex, EditNextOfKinDescriptor editNextOfKinDescriptor) {
         requireNonNull(patientIndex);
-        requireNonNull(editNokDescriptor);
+        requireNonNull(editNextOfKinDescriptor);
         this.patientIndex = patientIndex;
         this.nokIndex = nokIndex;
-        this.editNokDescriptor = new EditNokDescriptor(editNokDescriptor);
+        this.editNextOfKinDescriptor = new EditNextOfKinDescriptor(editNextOfKinDescriptor);
     }
 
-    private static NextOfKin createEditedNok(NextOfKin nokToEdit, EditNokDescriptor editNokDescriptor) {
+    private static NextOfKin createEditedNok(NextOfKin nokToEdit, EditNextOfKinDescriptor editNextOfKinDescriptor) {
         assert nokToEdit != null;
 
-        Name updatedName = editNokDescriptor.getName().orElse(nokToEdit.getName());
-        Phone updatedPhone = editNokDescriptor.getPhone().orElse(nokToEdit.getPhone());
-        Relationship updatedRelationship = editNokDescriptor.getRelationship().orElse(nokToEdit.getRelationship());
+        Name updatedName = editNextOfKinDescriptor.getName().orElse(nokToEdit.getName());
+        Phone updatedPhone = editNextOfKinDescriptor.getPhone().orElse(nokToEdit.getPhone());
+        Relationship updatedRelationship =
+            editNextOfKinDescriptor.getRelationship().orElse(nokToEdit.getRelationship());
 
         return new NextOfKin(updatedName, updatedPhone, updatedRelationship);
     }
@@ -92,7 +93,7 @@ public class EditNextOfKinCommand extends Command {
         }
 
         NextOfKin nokToEdit = nokList.get(nokIndex.getZeroBased());
-        NextOfKin editedNok = createEditedNok(nokToEdit, editNokDescriptor);
+        NextOfKin editedNok = createEditedNok(nokToEdit, editNextOfKinDescriptor);
 
         List<NextOfKin> updatedNokList = new ArrayList<>(nokList);
         updatedNokList.set(nokIndex.getZeroBased(), editedNok);
@@ -115,14 +116,14 @@ public class EditNextOfKinCommand extends Command {
         }
         return patientIndex.equals(otherEditCommand.patientIndex)
             && nokIndex.equals(otherEditCommand.nokIndex)
-            && editNokDescriptor.equals(otherEditCommand.editNokDescriptor);
+            && editNextOfKinDescriptor.equals(otherEditCommand.editNextOfKinDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
             .add("patientIndex", patientIndex)
-            .add("editNokDescriptor", editNokDescriptor)
+            .add("editNextOfKinDescriptor", editNextOfKinDescriptor)
             .toString();
     }
 
@@ -130,19 +131,19 @@ public class EditNextOfKinCommand extends Command {
      * Stores the details to edit the Nok with. Each non-empty field value will replace the
      * corresponding field value of the Nok.
      */
-    public static class EditNokDescriptor {
+    public static class EditNextOfKinDescriptor {
         private Name name;
         private Phone phone;
         private Relationship relationship;
 
-        public EditNokDescriptor() {
+        public EditNextOfKinDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditNokDescriptor(EditNokDescriptor toCopy) {
+        public EditNextOfKinDescriptor(EditNextOfKinDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setRelationship(toCopy.relationship);
@@ -186,13 +187,13 @@ public class EditNextOfKinCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditNokDescriptor otherEditNokDescriptor)) {
+            if (!(other instanceof EditNextOfKinDescriptor otherEditNextOfKinDescriptor)) {
                 return false;
             }
 
-            return Objects.equals(name, otherEditNokDescriptor.name)
-                && Objects.equals(phone, otherEditNokDescriptor.phone)
-                && Objects.equals(relationship, otherEditNokDescriptor.relationship);
+            return Objects.equals(name, otherEditNextOfKinDescriptor.name)
+                && Objects.equals(phone, otherEditNextOfKinDescriptor.phone)
+                && Objects.equals(relationship, otherEditNextOfKinDescriptor.relationship);
         }
 
         @Override
