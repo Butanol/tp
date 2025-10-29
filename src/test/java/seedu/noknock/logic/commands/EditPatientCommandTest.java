@@ -111,7 +111,8 @@ public class EditPatientCommandTest {
     public void createEditedPatient_failure() {
         Patient firstPerson = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(firstPerson).build();
-        assertThrows(NullPointerException.class, () -> new EditPatientCommand(null, new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build()));
+        assertThrows(NullPointerException.class, () -> new EditPatientCommand(null,
+                new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build()));
     }
 
     @Test
