@@ -31,22 +31,22 @@ import org.junit.jupiter.api.Test;
 
 import seedu.noknock.commons.core.index.Index;
 import seedu.noknock.logic.Messages;
-import seedu.noknock.logic.commands.EditCommand;
-import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
+import seedu.noknock.logic.commands.EditPatientCommand;
+import seedu.noknock.logic.commands.EditPatientCommand.EditPatientDescriptor;
 import seedu.noknock.model.person.IC;
 import seedu.noknock.model.person.Name;
 import seedu.noknock.model.person.Ward;
 import seedu.noknock.model.tag.Tag;
 import seedu.noknock.testutil.EditPatientDescriptorBuilder;
 
-public class EditCommandParserTest {
+public class EditPatientCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPatientCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private EditPatientCommandParser parser = new EditPatientCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -54,7 +54,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", EditPatientCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -105,7 +105,7 @@ public class EditCommandParserTest {
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withWard(VALID_WARD_BOB).withIC(VALID_IC_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -117,7 +117,7 @@ public class EditCommandParserTest {
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withWard(VALID_WARD_AMY)
                 .withIC(VALID_IC_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -128,25 +128,25 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + WARD_DESC_AMY;
         descriptor = new EditPatientDescriptorBuilder().withWard(VALID_WARD_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = targetIndex.getOneBased() + IC_DESC_AMY;
         descriptor = new EditPatientDescriptorBuilder().withIC(VALID_IC_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -188,7 +188,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

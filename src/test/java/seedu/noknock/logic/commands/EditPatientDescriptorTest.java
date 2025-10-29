@@ -12,7 +12,7 @@ import static seedu.noknock.logic.commands.CommandTestUtil.VALID_WARD_BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.noknock.logic.commands.EditCommand.EditPatientDescriptor;
+import seedu.noknock.logic.commands.EditPatientCommand.EditPatientDescriptor;
 import seedu.noknock.testutil.EditPatientDescriptorBuilder;
 
 public class EditPatientDescriptorTest {

@@ -60,8 +60,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPatientDescriptor DESC_AMY;
-    public static final EditCommand.EditPatientDescriptor DESC_BOB;
+    public static final EditPatientCommand.EditPatientDescriptor DESC_AMY;
+    public static final EditPatientCommand.EditPatientDescriptor DESC_BOB;
     public static final EditNextOfKinCommand.EditNextOfKinDescriptor DESC_DAUGHTER;
     public static final EditNextOfKinCommand.EditNextOfKinDescriptor DESC_GRANDPA;
 
