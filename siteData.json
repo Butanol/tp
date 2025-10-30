@@ -114,8 +114,10 @@
       "title": "User Guide",
       "headings": {
         "noknock-user-guide": "NOKnock User Guide",
+        "table-of-contents": "Table of Contents",
+        "introduction": "Introduction",
         "what-is-noknock": "What is NOKnock?",
-        "who-this-guide-is-for": "Who this guide is for",
+        "who-is-this-guide-for": "Who is This Guide For?",
         "why-a-cli-first-app-and-how-noknock-is-different": "Why a CLI-first app (and how NOKnock is different)",
         "quick-start": "Quick start",
         "system-requirements": "System requirements",
