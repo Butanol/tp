@@ -6,7 +6,8 @@ pageNav: 3
 
 # NOKnock User Guide
 
-# Introduction
+<!--* Table of Contents -->
+<page-nav-print />
 
 ## What is NOKnock?
 
@@ -14,7 +15,7 @@ Do you have trouble keeping track of the care your patients need? Do you wish th
 
 NOKnock! Who's there? NOKnock is a fast :runner:, keyboard-driven :musical_keyboard: app for nursing homes to track patients, their Next‑of‑Kin (NOK) contacts, and caring sessions. It is optimized for day-to-day floor operations where speed :clock1:, accuracy :round_pushpin:, and auditability matter more than complex GUIs. All it takes is the ability to type short commands! :satisfied:
 
-## Who is This Guide For?
+### Who is This Guide For?
 
 - You are a nursing home staff member (nurse, care aide, coordinator, or supervisor) who:
     - is comfortable typing short commands or following copy‑paste instructions.
@@ -47,7 +48,7 @@ New to the command line? You can copy each command from this guide and paste it 
 
 ---
 
-# Quick start
+## Quick start
 
 1. Ensure your system meets the [system requirements](#system-requirements) and has Java `17` — see [Getting Java 17](#getting-java-17).
 2. [Set up the app](#setting-up).
@@ -195,6 +196,7 @@ Made a typo? Use <code>edit-patient</code>, <code>edit-nok</code>, or <code>edit
 * All of the commands are 1 indexed. E.g. `delete-patient 1` means deleting the first person.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* 
 </box>
 
 ---
@@ -525,7 +527,7 @@ Displays all caring sessions scheduled for today.
 * Success → `today's sessions list` + list
 * None → `No caring sessions scheduled for today` + Shows an empty table with column headers but no entries.
 
-### View this week’s sessions: `sessions-week`
+### Viewing this week’s sessions: `sessions-week`
 
 Displays all caring sessions scheduled for the current week (Monday to Sunday).
 
@@ -590,23 +592,23 @@ Furthermore, certain edits can cause the NOKnock to behave in unexpected ways (e
 
 ## Command Summary
 
-| **Action**                                                      | **Format / Example**                                                                                                                                                                      |
-|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**List Patients**](#listing-all-patients-list-patients)        | `list-patients`                                                                                                                                                                           |
-| [**View Patient**](#viewing-patient-details-view-patient)       | `view-patient INDEX`                                                                                                                                                                      |
-| [**Add Patient**](#adding-a-patient-add-patient)                | `add-patient n/NAME ic/IC_NUMBER w/WARD [t/TAG]...`<br>e.g. `add-patient n/Dylan ic/S1234567A w/2A t/diabetes`                                                                            |
-| [**Edit Patient**](#editing-a-patient-edit-patient)             | `edit-patient INDEX [n/NAME] [w/WARD] [ic/IC_NUMBER] [t/TAG]...`<br>e.g. `edit-patient 1 n/Yue Yang`                                                                                      |
-| [**Delete Patient**](#deleting-a-patient-delete-patient)        | `delete-patient INDEX`<br>e.g. `delete-patient 2`                                                                                                                                         |
-| [**Add NOK**](#adding-a-nok-add-nok)                            | `add-nok PATIENT_INDEX n/NAME p/PHONE r/RELATIONSHIP`<br>e.g. `add-nok 1 n/Oad p/+6598765432 r/son`                                                                                       |
-| [**Edit NOK**](#editing-a-nok-edit-nok)                         | `edit-nok PATIENT_INDEX NOK_INDEX [n/NAME] [p/PHONE] [r/RELATIONSHIP]`<br>e.g. `edit-nok 1 1 p/+6588888888`                                                                               |
-| [**Delete NOK**](#deleting-a-nok-delete-nok)                    | `delete-nok PATIENT_INDEX NOK_INDEX`                                                                                                                                                      |
-| [**Add Caring Session**](#adding-a-session-add-session)         | `add-caring-session PATIENT_INDEX d/DATE t/TIME type/CARE_TYPE [notes/NOTES]`<br>e.g. `add-caring-session 1 d/2024-12-25 t/14:30 type/medication notes/Give insulin shot`                 |
-| [**Edit Caring Session**](#editing-a-session-edit-session)      | `edit-caring-session PATIENT_INDEX SESSION_INDEX [d/DATE] [t/TIME] [type/CARE_TYPE] [notes/NOTES] [status/STATUS]`<br>e.g. `edit-caring-session 1 2 d/2024-12-25 t/14:30 status/complete` |
-| [**Delete Caring Session**](#deleting-a-session-delete-session) | `delete-caring-session PATIENT_INDEX SESSION_INDEX`<br>e.g. `delete-caring-session 1 2`                                                                                                   |
-| [**Sessions Today**](#viewing-todays-sessions-sessions-today)   | `sessions-today`                                                                                                                                                                          |
-| [**Sessions Week**](#view-this-weeks-sessions-sessions-week)    | `sessions-week`                                                                                                                                                                           |
-| [**Help**](#viewing-help--help)                                 | `help`                                                                                                                                                                                    |
-| **Exit**                                                        | `exit`                                                                                                                                                                                    |
+| **Action**                                                       | **Format / Example**                                                                                                                                                                      |
+|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**List Patients**](#listing-all-patients-list-patients)         | `list-patients`                                                                                                                                                                           |
+| [**View Patient**](#viewing-patient-details-view-patient)        | `view-patient INDEX`                                                                                                                                                                      |
+| [**Add Patient**](#adding-a-patient-add-patient)                 | `add-patient n/NAME ic/IC_NUMBER w/WARD [t/TAG]...`<br>e.g. `add-patient n/Dylan ic/S1234567A w/2A t/diabetes`                                                                            |
+| [**Edit Patient**](#editing-a-patient-edit-patient)              | `edit-patient INDEX [n/NAME] [w/WARD] [ic/IC_NUMBER] [t/TAG]...`<br>e.g. `edit-patient 1 n/Yue Yang`                                                                                      |
+| [**Delete Patient**](#deleting-a-patient-delete-patient)         | `delete-patient INDEX`<br>e.g. `delete-patient 2`                                                                                                                                         |
+| [**Add NOK**](#adding-a-nok-add-nok)                             | `add-nok PATIENT_INDEX n/NAME p/PHONE r/RELATIONSHIP`<br>e.g. `add-nok 1 n/Oad p/+6598765432 r/son`                                                                                       |
+| [**Edit NOK**](#editing-a-nok-edit-nok)                          | `edit-nok PATIENT_INDEX NOK_INDEX [n/NAME] [p/PHONE] [r/RELATIONSHIP]`<br>e.g. `edit-nok 1 1 p/+6588888888`                                                                               |
+| [**Delete NOK**](#deleting-a-nok-delete-nok)                     | `delete-nok PATIENT_INDEX NOK_INDEX`                                                                                                                                                      |
+| [**Add Caring Session**](#adding-a-session-add-session)          | `add-caring-session PATIENT_INDEX d/DATE t/TIME type/CARE_TYPE [notes/NOTES]`<br>e.g. `add-caring-session 1 d/2024-12-25 t/14:30 type/medication notes/Give insulin shot`                 |
+| [**Edit Caring Session**](#editing-a-session-edit-session)       | `edit-caring-session PATIENT_INDEX SESSION_INDEX [d/DATE] [t/TIME] [type/CARE_TYPE] [notes/NOTES] [status/STATUS]`<br>e.g. `edit-caring-session 1 2 d/2024-12-25 t/14:30 status/complete` |
+| [**Delete Caring Session**](#deleting-a-session-delete-session)  | `delete-caring-session PATIENT_INDEX SESSION_INDEX`<br>e.g. `delete-caring-session 1 2`                                                                                                   |
+| [**Sessions Today**](#viewing-today-s-sessions-sessions-today)   | `sessions-today`                                                                                                                                                                          |
+| [**Sessions Week**](#viewing-this-week-s-sessions-sessions-week) | `sessions-week`                                                                                                                                                                           |
+| [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                                    |
+| **Exit**                                                         | `exit`                                                                                                                                                                                    |
 
 ## Glossary
 
