@@ -18,6 +18,19 @@ import seedu.noknock.testutil.EditPatientDescriptorBuilder;
 public class EditPatientDescriptorTest {
 
     @Test
+    public void isAnyFieldEdited() {
+        EditPatientDescriptorBuilder testDescriptorBuilder = new EditPatientDescriptorBuilder();
+        // unchanged -> false
+        assertFalse(testDescriptorBuilder.build().isAnyFieldEdited());
+
+        // changed -> true
+        assertTrue(testDescriptorBuilder.withIC("S1234568A").build().isAnyFieldEdited());
+        assertTrue(testDescriptorBuilder.withName("Bob").build().isAnyFieldEdited());
+        assertTrue(testDescriptorBuilder.withWard("1A").build().isAnyFieldEdited());
+        assertTrue(testDescriptorBuilder.withTags("stuff").build().isAnyFieldEdited());
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         EditPatientDescriptor descriptorWithSameValues = new EditPatientDescriptor(DESC_AMY);
@@ -58,7 +71,7 @@ public class EditPatientDescriptorTest {
         String expected = EditPatientDescriptor.class.getCanonicalName() + "{name="
             + editPersonDescriptor.getName().orElse(null) + ", ward="
             + editPersonDescriptor.getWard().orElse(null) + ", ic="
-            + editPersonDescriptor.getIc().orElse(null) + ", tags="
+            + editPersonDescriptor.getIC().orElse(null) + ", tags="
             + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
