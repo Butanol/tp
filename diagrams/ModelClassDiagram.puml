@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model as ModelPackage <<Rectangle>>{
+Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nModel" as Model
+Class AddressBook
+Class ModelManager
+Class UserPrefs
+
+Class UniquePatientList
+Class Patient
+abstract class Person
+Class NextOfKin
+Class Name
+Class Phone
+Class Tag
+Class Relationship
+Class Ward
+CLass IC
+Class CaringSession
+
+Class I #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+AddressBook .up.|> ReadOnlyAddressBook
+
+ModelManager .up.|> Model
+Model .right.> ReadOnlyUserPrefs
+Model .left.> ReadOnlyAddressBook
+ModelManager -left-> "1" AddressBook
+ModelManager -right-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+Patient -right-|> Person
+NextOfKin -up-|> Person
+
+AddressBook *--> "1" UniquePatientList
+UniquePatientList --> "~* all" Patient
+Person *--> Name
+Patient *--> IC
+Patient *--> "*" CaringSession
+Patient *--> "*" NextOfKin
+Patient *--> "*" Tag
+Patient *--> Ward
+NextOfKin *--> Relationship
+NextOfKin *--> Phone
+
+Patient -[hidden]up--> I
+UniquePatientList -[hidden]right-> I
+
+ModelManager --> "~* filtered" Patient
+@enduml
