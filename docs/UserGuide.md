@@ -51,7 +51,7 @@ pageNav: 3
 ## What is NOKnock?
 Do you have trouble keeping track of the care your patients need? Do you wish that you didn't have to go through entire Excel sheets whenever you need to contact a patient's family? We've got the solution!
 
-NOKnock! Who's there NOKnock is a fast :runner:, keyboard-driven :musical_keyboard: app for nursing homes to track patients, their Next‑of‑Kin (NOK) contacts, and caring sessions. It is optimized for day-to-day floor operations where speed, accuracy, and auditability matter more than complex GUIs. All it takes is the ability to type short commands! :satisfied:
+NOKnock! Who's there? NOKnock is a fast :runner:, keyboard-driven :musical_keyboard: app for nursing homes to track patients, their Next‑of‑Kin (NOK) contacts, and caring sessions. It is optimized for day-to-day floor operations where speed :clock1:, accuracy :round_pushpin:, and auditability matter more than complex GUIs. All it takes is the ability to type short commands! :satisfied:
 
 ## Who is This Guide For?
 
@@ -253,6 +253,8 @@ Displays all patients with basic information.
 
 * Success → Table with Index, Name, IC, Ward, Tags, NOK List, Caring Session List
 * None → `No patients in the system`
+<br/><br/>
+  ![List Example](images/screenshots/screenshot_list.png)
 
 ### Adding a patient: `add-patient`
 
