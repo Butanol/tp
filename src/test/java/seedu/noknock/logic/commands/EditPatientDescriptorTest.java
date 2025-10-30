@@ -56,10 +56,10 @@ public class EditPatientDescriptorTest {
     public void toStringMethod() {
         EditPatientDescriptor editPersonDescriptor = new EditPatientDescriptor();
         String expected = EditPatientDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", ward="
-                + editPersonDescriptor.getWard().orElse(null) + ", ic="
-                + editPersonDescriptor.getIC().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+            + editPersonDescriptor.getName().orElse(null) + ", ward="
+            + editPersonDescriptor.getWard().orElse(null) + ", ic="
+            + editPersonDescriptor.getIc().orElse(null) + ", tags="
+            + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }
