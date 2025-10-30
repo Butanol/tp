@@ -73,17 +73,22 @@ New to the command line? You can copy each command from this guide and paste it 
 - Fewer errors: A structured command format reduces ambiguity and helps prevent duplicate or inconsistent records.
 - Works offline: All data stays on your machine in a simple JSON file—no internet required.
 - Purpose‑built for nursing homes: Built‑in linkage between Patient ⇄ NOK ⇄ Caring Sessions fits actual eldercare workflows.
-- Lightweight and portable: A single .jar file you can run on any machine with Java 17+.
+- Lightweight and portable: A single .jar file you can run on any machine with Java `17` or higher.
 
-How it compares:
-- Versus spreadsheets: NOKnock enforces structure (unique IDs, linked NOKs/sessions), searchable lists, and date/time‑aware scheduling.
-- Versus GUI‑only tools: Keyboard‑first commands make bulk operations and day‑to‑day updates much faster once you get the hang of it.
+**Comparison:**
+
+| Feature                 | Spreadsheets                       | GUI-Only Tools                     | NOKnock (CLI-First)                  |
+|-------------------------|-----------------------------------|-----------------------------------|-------------------------------------|
+| Structured Data          | Limited                          | Moderate                          | Strong (IDs, linked NOKs & sessions)|
+| Bulk Operations          | Manual                           | Slower                            | Fast via commands                   |
+| Offline Usage            | Yes                              | Varies                             | Yes                                 |
+| Scheduling Awareness     | Manual                           | Often limited                      | Date/Time-aware                     |
 
 ---
 
 # Quick start
 
-1. Ensure you meet the [system requirements](#system-requirements) and have Java `17` — see [Getting Java 17](#getting-java-17).
+1. Ensure your system meets the [system requirements](#system-requirements) and has Java `17` — see [Getting Java 17](#getting-java-17).
 2. [Set up the app](#setting-up).
 3. Type commands — follow the [5‑minute first task](#5-minute-tutorial) to try the core workflow.
 4. Refer to the [Features](#features) below for details of each command.
@@ -92,27 +97,27 @@ How it compares:
 
 ## System requirements
 
-- Operating system:
+- **Operating system:**
     - Windows 10 or 11 (x64)
     - macOS 12+ (Intel or Apple Silicon)
-    - Linux (e.g., Ubuntu 20.04+/Debian 11+/Fedora 36+) with glibc compatible with Java 17
-- Java: JDK/JRE 17 or newer 
-- Disk: ~200 MB free (app + data headroom)
-- Permissions: Write access to the folder containing the .jar (for saving data to data/noknock.json)
-- Network: Not required (online access only needed to download Java/app updates)
+    - Linux (e.g., Ubuntu 20.04+/Debian 11+/Fedora 36+) with glibc compatible with Java `17`
+- **Java:** JDK/JRE 17 or newer 
+- **Disk:** ~200 MB free (app + data headroom)
+- **Permissions:** Write access to the folder containing the .jar
+- **Network:** Only needed for downloads and updates
 
 ---
 
-## Getting Java 17
+## Getting Java `17`
 
 Choose one of the following:
 
-- Windows: https://se-education.org/guides/tutorials/javaInstallationWindows.html
-- macOS: https://se-education.org/guides/tutorials/javaInstallationMac.html
-- Linux: https://se-education.org/guides/tutorials/javaInstallationLinux.html
+- **Windows:** https://se-education.org/guides/tutorials/javaInstallationWindows.html
+- **macOS:** https://se-education.org/guides/tutorials/javaInstallationMac.html
+- **Linux:** https://se-education.org/guides/tutorials/javaInstallationLinux.html
 
 <box type="info" seamless>
-If <code>java -version</code> doesn’t work, restart your terminal or computer, then try again. If it still fails, reinstall Java using the links above.
+If <code>java -version</code> fails, restart your terminal or computer, then try again. Reinstall Java if needed.
 </box>
 
 ---
@@ -122,15 +127,15 @@ If <code>java -version</code> doesn’t work, restart your terminal or computer,
 1. Download the latest `.jar` file from the Releases page:
    https://github.com/AY2526S1-CS2103T-W09-2/tp/releases
 
-2. Choose (or create) a folder to act as your NOKnock home folder, and copy the `.jar` file into it.
+2. Choose (or create) a folder to act as your **NOKnock** home folder, and copy the `.jar` file into it.
 
 3. Open a command terminal and change into that folder:
-    - Windows (PowerShell):
+    - **Windows (PowerShell):**
       ```
       cd "C:\path\to\your\NOKnock"
       java -jar noknock.jar
       ```
-    - macOS/Linux (Terminal):
+    - **macOS/Linux (Terminal):**
       ```
       cd ~/NOKnock
       java -jar noknock.jar
@@ -146,12 +151,12 @@ If <code>java -version</code> doesn’t work, restart your terminal or computer,
 
 Follow this quick walkthrough to learn the core workflow. Copy each command into NOKnock’s command box and press Enter.
 
-1) List current patients (to see indexes)
+**1) List current patients**
 ~~~
 list-patients
 ~~~
 
-2) Add a new patient
+**2) Add a new patient**
 ~~~
 add-patient n/Aisha Tan ic/S1234567A w/2A t/diabetes
 ~~~
@@ -160,22 +165,22 @@ Expected:
 Patient added: Aisha Tan (S1234567A)
 ~~~
 
-3) Find your patient’s index (since sample data may exist)
+**3) Find your patient’s index**
 ~~~
 find-patient aisha
 ~~~
 Note the Index shown for “Aisha Tan” (e.g., 5). Use that number in the next commands instead of X.
 
-4) Add a Next‑of‑Kin for that patient (replace X with Aisha’s index)
+**4) Add a Next‑of‑Kin for that patient (replace X with patient index)**
 ~~~
-add-nok X n/Daniel Tan p/+6598765432 r/son
+add-nok X n/Daniel Tan p/98765432 r/son
 ~~~
 Expected:
 ~~~
-NOK added for Aisha Tan: Daniel Tan (son, +6598765432)
+NOK added for Aisha Tan: Daniel Tan (son, 98765432)
 ~~~
 
-5) Schedule a caring session (replace X; adjust date/time as needed)
+**5) Schedule a caring session (replace X; adjust date/time as needed)**
 ~~~
 add-session X d/2025-11-01 time/09:30 type/medication notes/Metformin 500mg
 ~~~
@@ -184,52 +189,56 @@ Expected:
 Caring session added for Aisha Tan: medication on 2025-11-01 at 09:30
 ~~~
 
-6) View the full patient profile
+**6) View the full patient profile**
 ~~~
 view-patient 1
 ~~~
 You’ll see Aisha’s details, linked NOK(s), and upcoming sessions in one place.
 
-7) Optional: See today’s sessions
+**7) Optional:** See today’s sessions
 ~~~
 sessions-today
 ~~~
-Tip: If you want the session to appear here, schedule one with today’s date.
+
+<box type="tip" seamless>
+If you want the session to appear here, schedule one with today’s date.
+</box>
 
 <box type="tip" seamless>
 Made a typo? Use <code>edit-patient</code>, <code>edit-nok</code>, or <code>edit-session</code> to update fields; or the <code>delete-*</code> commands to remove entries. See Features below for full command formats and options.
 </box>
-
----
-
-## Features
 
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are parameters to be filled by the user.<br>
-  e.g. `add-patient n/NAME ic/IC_NUMBER w/WARD → add-patient n/Dylan ic/S1234567A w/2A`
+  e.g. `add-patient n/NAME ic/IC w/WARD → add-patient n/Dylan ic/S1234567A w/2A`
 
 * Items in square brackets `[ ]` are optional.<br>
-  e.g. `add-patient n/NAME ic/IC_NUMBER [t/TAG]` can be used with or without `t/TAG`.
+  e.g. `add-patient n/NAME ic/IC [t/TAG]` can be used with or without `t/TAG`.
 
 * Items with `...` can appear multiple times (including zero if the item is optional).<br>
   e.g. `[t/TAG]...` → no tags, one tag, or many tags.
 
 * Parameters can be in any order.<br>
-  e.g. `n/NAME w/WARD ic/IC_NUMBER` = `ic/IC_NUMBER w/WARD n/NAME`.
+  e.g. `n/NAME w/WARD ic/IC` = `ic/IC w/WARD n/NAME`.
 
 * Additional parameters for commands that do not accept them will be ignored.<br>
   e.g. `help abc` = `help`.
 
+* NOKnock automatically trims leading, trailing, and excess intermediate spaces in user input for key fields:
+  e.g. <code>ic/S1234567A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code> → <code>ic/S1234567A</code>,  
+  <code>n/Jane&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doe</code> → <code>n/Jane Doe</code>.
+
 * All of the commands are 1 indexed. E.g. `delete-patient 1` means deleting the first person.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
 </box>
 
-### Viewing help : `help`
+---
+
+## Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -252,7 +261,7 @@ Displays all patients with basic information.
 **Output:**
 
 * Success → Table with Index, Name, IC, Ward, Tags, NOK List, Caring Session List
-* None → `No patients in the system`
+* None → Shows an empty table with column headers but no entries.
 <br/><br/>
   ![List Example](images/screenshots/screenshot_list.png)
 
@@ -261,19 +270,29 @@ Displays all patients with basic information.
 Creates a new patient record.
 
 **Format:**  
-`add-patient n/NAME ic/IC_NUMBER w/WARD [t/TAG]...`
+`add-patient n/NAME ic/IC w/WARD [t/TAG]...`
 
 **Examples:**
 
 * `add-patient n/Dylan w/2A ic/S1234567A`
 * `add-patient n/Javier w/8B ic/S9876543B t/diabetes t/mobility-issues`
 
-💡 **Tip:** You can always enter the command phrase to be prompted the right usage of commands
+<box type="tip" seamless>
+
+**Tip:** You can always enter the command phrase to be prompted the right usage of commands
+
+</box>
+
 ![help message](images/TipCommandHint.png)
 
-❌ **Common mistakes**: It is common for one to enter the orders of fields wrongly.
-<box type="error">
-E.g.add-patient n/Amy ic/S1234567A w/2A
+<box type="warning" seamless>
+
+**Common mistakes**: It is common for one to enter the orders of fields wrongly, e.g.,
+
+```
+add-patient n/Amy ic/S1234567A w/2A
+```
+
 </box>
 
 <box type="tip" seamless>
@@ -288,12 +307,14 @@ E.g.add-patient n/Amy ic/S1234567A w/2A
 * Duplicate → `Patient with IC S1234567A already exists`
 * Invalid input → parameter-specific error message
 
+**Note:** A patient is considered a **duplicate** when the **IC** matches exactly.
+
 ### Editing a patient: `edit-patient`
 
 Updates an existing patient’s information. At least one field must be provided.
 
 **Format:**  
-`edit-patient INDEX [n/NAME] [ic/IC_NUMBER] [w/WARD] [t/TAG]...`
+`edit-patient INDEX [n/NAME] [ic/IC] [w/WARD] [t/TAG]...`
 
 **Examples:**
 
@@ -319,8 +340,8 @@ Removes a patient and all associated data (NOKs, sessions).
 
 **Output:**
 
-* Success → `Patient deleted: Yue Yang (S1234567A)`
-* Failure → `Patient not found at index X`
+* Success → `Patient deleted: Yue Yang`
+* Failure → `Invalid patient index. Please use a number from the patient list.`
 
 <box type="warning" seamless>
 
@@ -330,11 +351,15 @@ Removes a patient and all associated data (NOKs, sessions).
 
 <box type="tip" seamless>
 
-⚠️ Tip: Once the first person is deleted, the original second person becomes the first. To delete first N patients,
+Once the first person is deleted, the original second person becomes the first. To delete first N patients,
 use the `delete-patient 1` command for N times
+
 ![Delete](images/TipDeletePatient.png)
+
 ![Delete](images/TipDeletePatientAfter.png)
+
 </box>
+
 ### Viewing patient details: `view-patient`
 
 Shows full patient details including NOKs and upcoming sessions.
@@ -347,8 +372,9 @@ Shows full patient details including NOKs and upcoming sessions.
 
 **Output:**
 
-* Success → Full profile with NOK list and upcoming sessions
-* Failure → `Patient not found at index X`
+* Success → Full profile with NOK list and upcoming sessions.
+* Failure → `The patient index provided is invalid`
+
 ![View](images/ViewPatient.png)
 ### Finding patients by name: `find-patient`
 
@@ -364,13 +390,26 @@ Search for patients by name (case-insensitive, partial matching).
 
 **Output:**
 
-* Success → `2 patient(s) found:` + list
-* None → `No patients found matching: javier wong`
-⚠️ Tip: You can enter multiple keywords(capitalised or non-capitalised is fine) to find more than 1 patient. E.g
+* Success → `2 persons listed!` + list
+* None → `0 persons listed!`
+
+<box type="tip" seamless>
+
+**Tip**: You can enter multiple keywords(capitalised or non-capitalised is fine) to find more than 1 patient. E.g
+
+</box>
+
 ![Find](images/TipFindCommand.png)
+
 ![Find](images/TipFindCommandAfter.png)
-❗ **Common error**: keywords must match at least 1 word in patient's name. A prefix will not yield
+
+<box type="warning" seamless>
+
+**Common Mistake**: keywords must match at least 1 word in patient's name. A prefix will not yield
 any result.
+
+</box>
+
 ### Finding patients by NOK name: `find-by-nok`
 
 Search for patients based on their NOK’s name.
@@ -385,8 +424,8 @@ Search for patients based on their NOK’s name.
 
 **Output:**
 
-* Success → `1 patient(s) found (via NOK search):` + list
-* None → `No patients found with NOK matching: oad`
+* Success → `2 persons listed!` + list
+* None → `0 persons listed!`
 
 ---
 
@@ -401,19 +440,26 @@ Adds a Next-of-Kin contact for a patient.
 
 **Examples:**
 
-* `add-nok 1 n/Oad p/+6598765432 r/son`
-* `add-nok 2 n/Dr. Kapikapi p/+656234-5678 r/doctor`
+* `add-nok 1 n/Oad p/98765432 r/son`
+* `add-nok 2 n/Dr. Kapikapi p/6234-5678 r/doctor`
 
 **Output:**
 
-* Success → `NOK added for Dylan: Oad (son, +6598765432)`
-* Duplicate → `NOK with same name and phone already exists for this patient`
+* Success → `Added NextOfKin: Oad to Patient: Dylan`
+* Duplicate → `This next of kin already exists for this patient`
 
-⚠️ **Tip**: you can always use the `list-patient` command to see the list of patients before deciding which patient the
-nok should be added to.
+**Note:** A NOK is considered a **duplicate** when both the **Name** and **Phone** match exactly. *(Comparison is case-sensitive.)*
+
+<box type="tip" seamless>
+
+**Tip**: you can always use the `list-patients` command to see the list of patients before deciding which patient the NOK should be added to.
+
+</box>
 
 After adding a patient, you should see something similar to the picture below
+
 ![AddNOK](images/TipAddNOKCommand.png)
+
 ### Editing a NOK: `edit-nok`
 
 Updates NOK details.
@@ -422,12 +468,12 @@ Updates NOK details.
 `edit-nok PATIENT_INDEX NOK_INDEX [n/NAME] [p/PHONE] [r/RELATIONSHIP]`
 
 **Example:**  
-`edit-nok 1 1 p/+6588888888`
+`edit-nok 1 1 p/88888888`
 
 **Output:**
 
-* Success → `NOK updated for Dylan: Oad (son, +6588888888)`
-* Failure → `Patient/NOK not found`
+* Success → `Edited NextOfKin: oad of Patient: Dylan`
+* Failure → `The patient/Next-of-Kin index provided is invalid`
 
 ### Deleting a NOK: `delete-nok`
 
@@ -441,8 +487,8 @@ Removes a NOK from a patient.
 
 **Output:**
 
-* Success → `NOK deleted for Dylan: Oad Smith`
-* Failure → `Patient/NOK not found`
+* Success → `Deleted NextOfKin: oad`
+* Failure → `The patient/Next-of-Kin index provided is invalid`
 
 ---
 
@@ -479,12 +525,15 @@ Edit an existing care session for a patient. You may also update the session sta
 
 **Output:**
 
-* Success -> `Session updated: Dylan - medication - 2024-12-25 14:30 (complete)`
+* Success -> `Added Caring Session: medication on 2025-12-25 at 14:30 to Patient: Javier`
 * Failure -> parameter-specific error (e.g. invalid date/time or indices)
 
-⚠️ **Tip**: To get a better view of the caring session for a specific patient before editing, use `view-patient`
-command. 
-E.g. To edit a session of first patient, limit the caring sessions view to that of the first patient only
+<box type="tip" seamless>
+
+**Tip**: To get a better view of the caring session for a specific patient before editing, use `view-patient`
+command. E.g. To edit a session of first patient, limit the caring sessions view to that of the first patient only
+
+</box>
 
 ![Edit Session](images/TipEditSessionCommand.png)
 
@@ -500,8 +549,8 @@ Deletes a care session from a patient.
 
 **Output:**
 
-* Success → `Caring session deleted for Dylan: medication on 2024-12-25 at 14:30`
-* Failure → `Patient/Session not found`
+* Success → `Deleted caring session for medication on 2025-12-25 at 14:30: Javier`
+* Failure → `The patient/caring session index provided is invalid`
 
 ### Viewing today’s sessions: `sessions-today`
 
@@ -512,8 +561,8 @@ Displays all caring sessions scheduled for today.
 
 **Output:**
 
-* Success → `Today's caring sessions (2025-10-22):` + list
-* None → `No caring sessions scheduled for today`
+* Success → `today's sessions list` + list
+* None → `No caring sessions scheduled for today` + Shows an empty table with column headers but no entries.
 
 ### View this week’s sessions: `sessions-week`
 
@@ -524,8 +573,8 @@ Displays all caring sessions scheduled for the current week (Monday to Sunday).
 
 **Output:**
 
-* Success → `This week's caring sessions (2025-10-20 to 2025-10-26):` + list
-* None → `No caring sessions scheduled for this week`
+* Success → `this week's sessions` + list
+* None → `No caring sessions scheduled for this week` + Shows an empty table with column headers but no entries.
 
 ---
 
@@ -597,3 +646,18 @@ Furthermore, certain edits can cause the NOKnock to behave in unexpected ways (e
 | [**Sessions Week**](#view-this-weeks-sessions-sessions-week)    | `sessions-week`                                                                                                                                                                           |
 | [**Help**](#viewing-help--help)                                 | `help`                                                                                                                                                                                    |
 | **Exit**                                                        | `exit`                                                                                                                                                                                    |
+
+## Glossary
+
+| Term / Acronym       | Definition |
+|---------------------|------------|
+| **IC**               | **Identification Code** — a unique identifier for each patient, e.g., `S1234567A`. |
+| **NOK**              | **Next-of-Kin** — a person designated as the patient’s emergency or primary contact (e.g., family member, caregiver). |
+| **GUI**              | **Graphical User Interface** — a visual interface of the app with windows, buttons, and menus, as opposed to the CLI (command-line interface). |
+| **Ward**             | A designated area or unit within the nursing home where the patient resides, e.g., `2A`. |
+| **Caring Session**   | A scheduled task or activity related to patient care, such as administering medication, hygiene assistance, or medical observation. |
+| **CLI**              | **Command-Line Interface** — an interface where the user types text commands to perform actions. |
+| **JSON**             | **JavaScript Object Notation** — a lightweight data format used to store and exchange data; NOKnock stores patient/NOK/session data in JSON. |
+| **JAR**              | **Java ARchive** — a packaged file containing the Java application, which can be run on any system with Java installed. |
+| **Index**            | A 1-based number representing a patient, NOK, or session in a list (e.g., patient 1, NOK 2). |
+| **Tag**              | A label used to classify a patient’s condition or requirement, e.g., `diabetes`, `mobility-issues`. |
