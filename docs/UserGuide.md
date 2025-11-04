@@ -279,13 +279,15 @@ Creates a new patient record.
 
 <box type="tip" seamless>
 
-**Tip:** You can always enter the command phrase to be prompted the right usage of commands. The order of fields does not matter. For example, `add-patient t/Urgent ic/S2345678A w/2A n/Amy` is also valid.
+**Tip:** Tags are optional and can be used to describe medical or care-related info.
 
 </box>
 
+![help message](images/TipCommandHint.png)
+
 <box type="tip" seamless>
 
-**Tip:** Tags are optional and can be used to describe medical or care-related info.
+**Tip:** You can always enter the command phrase to be prompted the right usage of commands. The order of fields does not matter. For example, `add-patient t/Urgent ic/S2345678A w/2A n/Amy` is also valid.
 
 </box>
 
@@ -297,7 +299,6 @@ Creates a new patient record.
 
 **Note:** A patient is considered a **duplicate** when the **IC** matches exactly.
 
-![help message](images/TipCommandHint.png)
 
 ### Editing a patient: `edit-patient`
 
